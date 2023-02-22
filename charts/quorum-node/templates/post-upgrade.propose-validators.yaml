@@ -3,121 +3,90 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "quorumNode.fullname" . }}-quorum-propose
+  name: quorum-propose-post-upgrade
   namespace: {{ default .Release.Namespace }}
   labels:
-    app: {{ include "quorumNode.fullname" . }}-quorum-propose
+    app: quorum-propose-post-upgrade
   annotations:
     "helm.sh/hook": post-upgrade
-    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+    "helm.sh/hook-delete-policy": before-hook-creation, hook-succeeded
     "helm.sh/hook-weight": "100"
 spec:
-  backoffLimit: 4
-  activeDeadlineSeconds: 120
-  {{- if .Values.kubectl.ttlSecondsAfterFinished }}
-  ttlSecondsAfterFinished: {{ .Values.kubectl.ttlSecondsAfterFinished }}
-  {{- end }}
   template:
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "quorumNode.fullname" . }}-quorum-propose
-      automountServiceAccountToken: true
-      {{- with .Values.kubectl.podSecurityContext }}
-      securityContext:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      restartPolicy: Never
+      serviceAccountName: quorum-propose-service-account
       containers:
-        - name: kubectl
-          {{- with .Values.kubectl.securityContext }}
-          securityContext:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.kubectl.resources }}
-          resources:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          image: {{ include "quorumNode.kubectl.image" . | quote }}
-          imagePullPolicy: {{ .Values.kubectl.image.pullPolicy | default "Always" }}
-          command:
-            - sh
-            - -cx
+        - name: quorum-propose-post-upgrade
+          imagePullPolicy: IfNotPresent
+          image: bitnami/kubectl:1.23.5
+          command: [ "sh" ]
           args:
-            - |
-              # No need to scale down and up in order to reflect latest changes as the deployment reacts to changes in configmaps/secrets
-              # See https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments
-              #
-              echo "Sleeping for short time to wait until container may have restarted"
-              sleep 60
-              echo "Propose all as validator..."
-              kubectl exec --container=quorum -t deploy/{{ include "quorumNode.fullname" . }} -- {{ .Values.quorum.homeMountPath }}/node-management/ibft_propose_all.sh
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-
+            - "-cx"
+            - "
+            kubectl scale --replicas=0 deployment/{{ include "quorumNode.Identifier" . }}-deployment;
+            sleep 120;
+            kubectl scale --replicas=1 deployment/{{ include "quorumNode.Identifier" . }}-deployment;
+            sleep 120;
+            kubectl exec -it deploy/{{ include "quorumNode.Identifier" . }}-deployment -- /etc/quorum/qdata/node-management/ibft_propose_all.sh;
+            "
+      restartPolicy: Never
 ---
 # TODO : add remove of validators in plugin, chart as sh ibft_un_propose_all.sh and job
-kind: Role
+kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ include "quorumNode.fullname" . }}-quorum-propose
+  name: quorum-propose-cr
   namespace: {{ default .Release.Namespace }}
   annotations:
     "helm.sh/hook": post-upgrade
-    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
+    "helm.sh/hook-delete-policy": before-hook-creation, hook-succeeded
     "helm.sh/hook-weight": "20"
 rules:
   - apiGroups: [""]
     resources: ["pods"]
-    verbs: ["list"]
+    verbs: ["get","list","watch"]
   - apiGroups: [""]
     resources: ["pods/exec"]
-    verbs: ["create","watch"]
+    verbs: ["create","get","list","watch"]
   - apiGroups: ["apps"]
     resources: ["deployments"]
-    resourceNames: [{{ include "quorumNode.fullname" . | quote }}]
-    verbs: ["get"]
+    verbs: ["get","list","patch","update"]
+  - apiGroups: ["apps"]
+    resources: ["deployments/scale"]
+    verbs: ["patch"]
+
+
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ include "quorumNode.fullname" . }}-quorum-propose
+  name: quorum-propose-rb
   namespace: {{ default .Release.Namespace }}
   annotations:
     "helm.sh/hook": post-upgrade
-    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
+    "helm.sh/hook-delete-policy": before-hook-creation, hook-succeeded
     "helm.sh/hook-weight": "30"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: {{ include "quorumNode.fullname" . }}-quorum-propose
+  kind: ClusterRole
+  name: quorum-propose-cr
 subjects:
   - kind: ServiceAccount
-    name: {{ include "quorumNode.fullname" . }}-quorum-propose
-    namespace: {{ default .Release.Namespace }}
+    name: quorum-propose-service-account
+    namespace: default
+
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ include "quorumNode.fullname" . }}-quorum-propose
+  name: quorum-propose-service-account
   namespace: {{ default .Release.Namespace }}
   labels:
-    name: {{ include "quorumNode.fullname" . }}-quorum-propose
+    name: quorum-propose-service-account
   annotations:
     "description": "ServiceAccount for quorum propose all validators and deployments restarts"
     "helm.sh/hook": post-upgrade
-    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded,hook-failed
+    "helm.sh/hook-delete-policy": before-hook-creation, hook-succeeded
     "helm.sh/hook-weight": "10"
-{{- end }}
+---
+  {{- end }}

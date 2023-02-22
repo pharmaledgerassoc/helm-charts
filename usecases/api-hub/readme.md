@@ -4,7 +4,7 @@
 
 Install a new ApiHub running instance
 
-Chart name: network_name (e.g. epi, csc, iot)<br/>
+Chart name: install-api-hub <br/>
 Plugin : None
 
 ### ApiHub deployment
@@ -16,25 +16,24 @@ Plugin : None
 ```shell
 cd private_configs
 ```
-2. Create a folder which will represent your installation, like "network_name" and change the directory to that folder
+2. Create a folder which will represent your installation, like "network_name/charts/epi-api-hub" and change the directory to that folder
 ```shell
-cd network_name
+cd network_name/charts/epi-api-hub
 ```
 
-#### Step 2: Update the helm charts
+#### Step 2: Install the helm chart and the plugin
 
-1. Execute
+1. Register the official, or the forked helm charts repository
 ```shell
-helm repo update pharmaledgerassoc
+helm repo add helm-charts https://raw.githubusercontent.com/PharmaLedger-IMI/helm-charts/master/charts/releases
+```
+2. Install the helm chart _install-api-hub_
+```shell
+helm pull helm-charts/install-api-hub --untar
 ```
 
-2.Download the values for the helm chart network_name
-```shell
-helm show values pharmaledgerassoc/network_name > my-values.yaml
-```
 
-
-#### Step 3: Adjust private_configs/network_name/my-values.yaml
+#### Step 3: Adjust private_configs/network_name/charts/epi-api-hub/install-api-hub/values.yaml
 
 The file contains parametrization for different sets of values:
 1. specific data for the upload of the public shared information
@@ -47,11 +46,11 @@ The file contains parametrization for different sets of values:
 
 1. Install the helm chart
 ```shell
-helm upgrade --install network-name pharmaledgerassoc/network-name -f ./my-values.yaml
+helm install epi . -f ./values.yaml
 ```
 
 #### Step 5: Backup your installation and private information
 
-Upload to your private repository all the data located in the folder _private_configs/network_name/network_name_
+Upload to your private repository all the data located in the folder _private_configs/network_name/charts/epi-api-hub_
 
 
