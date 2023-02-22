@@ -1,0 +1,201 @@
+{{ template "chart.header" . }}
+
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
+
+{{ template "chart.description" . }}
+
+## Requirements
+
+- [helm 3](https://helm.sh/docs/intro/install/)
+
+## Changelog
+
+See [Changelog](./CHANGELOG.md) for significant changes!
+
+## Features
+
+- Security by default:
+  - SecurityContext
+  - Non-root user
+  - readonly filesystem
+- Option to create VolumeSnapshots on *helm upgrade* or before deletion of the helm release. See [here](./docs/volumesnapshots/README.md) for details.
+- Option to mount sensitive/secret via *CSI Secrets Driver* from a vault solution like AWS Secrets Manager, Azure Key Vault, GCP Secrets Manager or HashiCorp Vault instead of using *Kubernetes Secret*. See [here](./docs/secret_provider_class/README.md) for details.
+- Option to provide `extraResources` like
+  - [Network Policies](./docs/network_policies/README.md) for fine-grained control of network traffic
+  - [Scheduled VolumeSnapshots](./docs/scheduled_volumesnapshots/README.md) for creating regular data backups
+
+## Usage and samples
+
+- [Here](./README.md#values) is a full list of all configuration values.
+- The [values.yaml file](./values.yaml) shows the raw view of all configuration values.
+- [**FULL SAMPLE**](./docs/full_sample/README.md) with multiple features combined.
+- [Auto-Create Volumesnapshots](./docs/volumesnapshots/README.md) on helm upgrade and before deletion of the helm release.
+- [Mount Secrets from Vault Solution via Secrets Store CSI Driver](./docs/secret_provider_class/README.md)
+- [Network Policies](./docs/network_policies/README.md)
+- [AWS Load Balancer Controller: Expose Service via Network Load Balancer](./docs/aws_lb_controller_service_nlb/README.md)
+
+## Installing the Chart
+
+These four installation samples demonstrate
+
+1. the different use case combinations
+2. how to pass the configuration settings provided by the plugin which is located [here](https://github.com/pharmaledgerassoc/helm-pl-plugin.git).
+
+**Note:** In case you are using the plugin mechanism, read the details about operating the plugin which can be found in the specific use case documentation.
+
+### Option 1: Join Network followed by updating the PartnerInfo
+
+The **most common option** is to [join an existing network](../../usecases/join-network/readme.md) and to [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - which proposes PartnerNodes to Validators.
+
+Also see **[Full Sample](./docs/full_sample/README.md)**.
+
+```yaml
+use_case:
+  newNetwork:
+    enabled: false
+use_case:
+  joinNetwork:
+    enabled: true
+use_case:
+  updatePartnersInfo:
+    enabled: true
+```
+
+```shell
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version={{ template "chart.version" . }} \
+  --values ./my-values.yaml \
+  --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
+  --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json \
+  --set-file use_case.updatePartnersInfo.plugin_data_common=./update-partners-info.plugin.json
+
+```
+
+### Option 2: Only Join Network w/o updating PartnerInfos
+
+You can also simply [join an existing network](../../usecases/join-network/readme.md) and do **not** [update the PartnerInfo](../../usecases/update-partners-info/readme.md).
+
+```yaml
+use_case:
+  newNetwork:
+    enabled: false
+use_case:
+  joinNetwork:
+    enabled: true
+use_case:
+  updatePartnersInfo:
+    enabled: false
+```
+
+```shell
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version={{ template "chart.version" . }} \
+  --values ./my-values.yaml \
+  --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
+  --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
+
+```
+
+### Option 3: New Network followed by updating the PartnerInfo
+
+Create a [New network](../../usecases/new-network/readme.md) and [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - which proposes PartnerNodes to Validators.
+
+```yaml
+use_case:
+  newNetwork:
+    enabled: true
+use_case:
+  joinNetwork:
+    enabled: false
+use_case:
+  updatePartnersInfo:
+    enabled: true
+```
+
+```shell
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version={{ template "chart.version" . }} \
+  --values ./my-values.yaml \
+  --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
+  --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json \
+  --set-file use_case.updatePartnersInfo.plugin_data_common=./update-partners-info.plugin.json
+
+```
+
+### Option 4: New Network
+
+Simply create a [New network](../../usecases/new-network/readme.md)
+
+```yaml
+use_case:
+  newNetwork:
+    enabled: true
+use_case:
+  joinNetwork:
+    enabled: false
+use_case:
+  updatePartnersInfo:
+    enabled: false
+```
+
+```shell
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version={{ template "chart.version" . }} \
+  --values ./my-values.yaml \
+  --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
+  --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json
+
+```
+
+## Monitoring
+
+[See here](./docs/monitoring/README.md)
+
+## Troubleshooting
+
+1. Determine your own public ip address: Open a shell in your quorum pod and run `wget -O - ifconfig.me/ip -q`
+2. Determine current TCP connections status of your quorum node: Open a shell in your quorum pod and run `netstat -atn`
+
+## Additional helm options
+
+Run `helm upgrade --helm` for full list of options.
+
+1. Install to other namespace
+
+    You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
+
+    ```bash
+    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version={{ template "chart.version" . }} \
+      --install \
+      --namespace=my-namespace \
+      --values my-values.yaml \
+    ```
+
+2. Wait until installation has finished successfully and the deployment is up and running.
+
+    Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
+
+    ```bash
+    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version={{ template "chart.version" . }} \
+      --install \
+      --wait --timeout=600s \
+      --values my-values.yaml \
+    ```
+
+## Uninstalling the Helm Release
+
+To uninstall/delete the `quorum-node-0` release:
+
+```bash
+helm delete quorum-node-0 \
+  --namespace=my-namespace
+
+```
+
+{{ template "chart.maintainersSection" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesHeader" . }}
+
+*Note:* Please scroll horizontally to show more columns (e.g. description)!
+
+{{ template "chart.valuesTable" . }}
+
+{{ template "helm-docs.versionFooter" . }}

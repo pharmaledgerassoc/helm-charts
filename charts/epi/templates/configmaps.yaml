@@ -1,0 +1,21 @@
+{{- /*
+Create Configmaps from templates
+*/}}
+
+{{- include "epi.configmap-bdns" (list $ . "" (dict)) }}
+---
+{{- include "epi.configmap-domains" (list $ . "" (dict)) }}
+---
+{{- include "epi.configmap-environment" (list $ . "" (dict)) }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "epi.fullname" . }}-build-info
+  namespace: {{ template "epi.namespace" . }}
+  annotations:
+    "description": "Info about which builder image was used at last"
+  labels:
+    {{- include "epi.labels" . | nindent 4 }}
+data:
+  lastBuilderImage: {{ include "epi.builder.image" . | quote }}

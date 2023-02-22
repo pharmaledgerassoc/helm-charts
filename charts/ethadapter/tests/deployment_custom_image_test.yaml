@@ -1,0 +1,38 @@
+suite: test deployment with an custom image and pullPolicy IfNotPresent
+templates:
+  - deployment.yaml
+  - configmap.yaml
+  - secret.yaml
+tests:
+  - it: should work
+    set:
+      config:
+        rpcAddress: "rpcAddress_value"
+        smartContractInfo: |-
+          {
+            "address": "address",
+            "abi": "abi"
+          }
+      secrets:
+        orgAccountJson: "{ \"key\": \"value\" }"
+      image:
+        repository: custom_repository
+        pullPolicy: IfNotPresent
+        tag: "custom_tag"
+        sha: ""
+    asserts:
+      - template: deployment.yaml
+        isKind:
+          of: Deployment
+      - template: deployment.yaml
+        matchRegex:
+          path: metadata.name
+          pattern: -ethadapter$
+      - template: deployment.yaml
+        equal:
+          path: spec.template.spec.containers[0].image
+          value: custom_repository:custom_tag
+      - template: deployment.yaml
+        equal:
+          path: spec.template.spec.containers[0].imagePullPolicy
+          value: IfNotPresent

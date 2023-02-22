@@ -1,0 +1,13 @@
+compact: true
+directory:
+- charts/epi
+download-external-modules: false
+evaluate-variables: true
+external-modules-download-path: .external_modules
+framework:
+- helm
+quiet: true
+soft-fail: true
+var-file:
+- .checkov/epi/values.yaml
+output: cli

@@ -1,0 +1,9 @@
+# See https://github.com/helm/chart-testing#configuration
+remote: origin
+target-branch: master
+chart-dirs:
+  - charts
+chart-repos:
+  - pharmaledgerassoc=https://pharmaledgerassoc.github.io/helm-charts
+helm-extra-args: --timeout 600s
+validate-maintainers: false

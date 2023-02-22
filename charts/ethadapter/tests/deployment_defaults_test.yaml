@@ -1,0 +1,37 @@
+suite: test deployment with default values
+templates:
+  - deployment.yaml
+  - configmap.yaml
+  - secret.yaml
+tests:
+  - it: should work
+    set:
+      config:
+        rpcAddress: "rpcAddress_value"
+        smartContractInfo: |-
+          {
+            "address": "address",
+            "abi": "abi"
+          }
+      secrets:
+        orgAccountJson: "{ \"key\": \"value\" }"
+    asserts:
+      - template: deployment.yaml
+        isKind:
+          of: Deployment
+      - template: deployment.yaml
+        matchRegex:
+          path: metadata.name
+          pattern: -ethadapter$
+      - template: deployment.yaml
+        equal:
+          path: spec.template.spec.containers[0].image
+          value: pharmaledger/ethadapter:1.0.2@sha256:e387f4b292fff25f6d7fa1792ec586bf46cab31265a84136561c469accd81b06
+      - template: deployment.yaml
+        equal:
+          path: spec.template.spec.containers[0].imagePullPolicy
+          value: Always
+      - template: deployment.yaml
+        equal:
+          path: spec.template.spec.automountServiceAccountToken
+          value: false

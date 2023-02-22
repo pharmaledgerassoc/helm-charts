@@ -1,0 +1,14 @@
+{{- $smartContractInfoJson := ( include "ethadapter.smartContractInfo" . | fromJson ) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ethadapter.fullname" . }}
+  namespace: {{ template "ethadapter.namespace" . }}
+  annotations:
+    "description": "Configuration of EthAdapter"
+  labels:
+    {{- include "ethadapter.labels" . | nindent 4 }}
+data:
+  rpcAddress: {{ required "config.rpcAddress must be set" .Values.config.rpcAddress | quote }}
+  smartContractAddress: >- {{ required "smartContractInfo JSON object must contain value for key 'address'" $smartContractInfoJson.address | nindent 4 }}
+  smartContractAbi: >- {{ required "smartContractInfo JSON object must contain value for key 'abi'" $smartContractInfoJson.abi | nindent 4 }}
