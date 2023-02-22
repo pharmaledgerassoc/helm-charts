@@ -5,7 +5,7 @@
 Deploy a single quorum node with the node and genesis cryptography generated at runtime. After the deployment, the genesis and node connection information is uploaded to a chosen repository. 
 
 [Chart name: quorum-node](../../charts/quorum-node)<br/>
-[Plugin : new-network](https://github.com/pharmaledgerassoc/helm-pl-plugin)
+[Plugin : new-network](https://github.com/pharmaledgerassoc/helm-plugins)
 
 ### Quorum node deployment
 
@@ -38,7 +38,7 @@ helm show values helm-charts/quorum-node > my-values.yaml
 ```
 3. Install the _<pl-deployment-plugin>_ plugin
 ```shell
-helm plugin install https://github.com/pharmaledgerassoc/helm-pl-plugin
+helm plugin install https://github.com/pharmaledgerassoc/helm-plugins
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/quorum-node-0/new-network/my-values.yaml
