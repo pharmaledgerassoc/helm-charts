@@ -5,7 +5,7 @@
 Deploy a single quorum node with the node and genesis cryptography generated at runtime. After the deployment, the genesis and node connection information is uploaded to a chosen repository. 
 
 [Chart name: quorum-node](../../charts/quorum-node)<br/>
-[Plugin : new-network](https://github.com/PharmaLedger-IMI/helm-pl-plugin)
+[Plugin : new-network](https://github.com/pharmaledgerassoc/helm-pl-plugin)
 
 ### Quorum node deployment
 
@@ -38,7 +38,7 @@ helm show values helm-charts/quorum-node > my-values.yaml
 ```
 3. Install the _<pl-deployment-plugin>_ plugin
 ```shell
-helm plugin install https://github.com/PharmaLedger-IMI/helm-pl-plugin
+helm plugin install https://github.com/pharmaledgerassoc/helm-pl-plugin
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/quorum-node-0/new-network/my-values.yaml
@@ -58,7 +58,7 @@ The structure of the values.yaml file is documented in [quorum-node chart folder
    1. _new-network.plugin.json_ file that will contain all the generated information, like account, node public crypto data, genesis data. The json file will be used by the new-network helm charts. This file will be preserved in the private repository.
       This file is also used in two ways:
        1. to generate the configmaps for the deployment of the Quorum Node (see step 4.2)
-       2. in the post-install step of the helm chart (in 4.2) to generate shared configurations and upload it in the shared repository (documented in https://github.com/PharmaLedger-IMI/helm-charts/blob/master/charts/read.me) 
+       2. in the post-install step of the helm chart (in 4.2) to generate shared configurations and upload it in the shared repository (documented in https://github.com/pharmaledgerassoc/helm-charts/blob/master/charts/read.me) 
    
    3. _new-network.plugin.secrets.json_ file that will contain all the private information like private keys/passwords/etc. of the blockchain account and node. This file will be preserved in the private repository.
    

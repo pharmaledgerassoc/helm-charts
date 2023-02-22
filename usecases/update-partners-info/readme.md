@@ -25,7 +25,7 @@ cd network_name/charts/update-partners-info-qn-0
 
 1. Register the official, or the forked helm charts repository
 ```shell
-helm repo add helm-charts https://raw.githubusercontent.com/PharmaLedger-IMI/helm-charts/master/charts/releases
+helm repo add helm-charts https://raw.githubusercontent.com/pharmaledgerassoc/helm-charts/master/charts/releases
 ```
 2. Install the helm chart _update-partners-info_
 ```shell
@@ -33,7 +33,7 @@ helm pull helm-charts/update-partners-info --untar
 ```
 3. Install the _update-partners-info_ plugin
 ```shell
-helm plugin install https://github.com/PharmaLedger-IMI/helm-charts/plugins/update-partners-info
+helm plugin install https://github.com/pharmaledgerassoc/helm-charts/plugins/update-partners-info
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/update-partners-info-qn-0/update-partners-info/values.yaml

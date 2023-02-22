@@ -25,7 +25,7 @@ cd network_name/charts/anchor-sc
 
 1. Register the official, or the forked helm charts repository
 ```shell
-helm repo add helm-charts https://raw.githubusercontent.com/PharmaLedger-IMI/helm-charts/master/charts/releases
+helm repo add helm-charts https://raw.githubusercontent.com/pharmaledgerassoc/helm-charts/master/charts/releases
 ```
 2. Install the helm chart _ethereum-sc_
 ```shell
@@ -33,7 +33,7 @@ helm pull helm-charts/ethereum-sc --untar
 ```
 3. Install the _ethereum-sc_ plugin
 ```shell
-helm plugin install https://github.com/PharmaLedger-IMI/helm-charts/plugins/ethereum-sc
+helm plugin install https://github.com/pharmaledgerassoc/helm-charts/plugins/ethereum-sc
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/anchor-sc/ethereum-sc/values.yaml
