@@ -39,7 +39,7 @@ See [Changelog](./CHANGELOG.md) for significant changes!
 These four installation samples demonstrate
 
 1. the different use case combinations
-2. how to pass the configuration settings provided by the plugin which is located [here](https://github.com/pharmaledgerassoc/helm-pl-plugin.git).
+2. how to pass the configuration settings provided by the plugin which is located [here](https://github.com/pharmaledgerassoc/helm-plugins.git).
 
 **Note:** In case you are using the plugin mechanism, read the details about operating the plugin which can be found in the specific use case documentation.
 

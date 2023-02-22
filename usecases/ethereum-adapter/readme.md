@@ -33,7 +33,7 @@ helm pull helm-charts/ethereum-adapter --untar
 ```
 3. Install the _ethereum-adapter_ plugin
 ```shell
-helm plugin install https://github.com/pharmaledgerassoc/helm-pl-plugin
+helm plugin install https://github.com/pharmaledgerassoc/helm-plugins
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/ethereum-adapter/eth-adapter-values.yaml
