@@ -1,6 +1,6 @@
 # ethadapter
 
-![Version: 0.7.11](https://img.shields.io/badge/Version-0.7.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
+![Version: 0.7.12](https://img.shields.io/badge/Version-0.7.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.0.2](https://img.shields.io/badge/AppVersion-1.0.2-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger Ethereum Adapter Service
 
@@ -80,7 +80,7 @@ Configuration for a connected environment. You will need at least these configur
     Either pass sensitive *Org Account JSON* (`secrets.orgAccountJson`) in JSON format as escaped string:
 
     ```bash
-    helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.11 \
+    helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.12 \
         --values my-values.yaml \
         --set-string secrets.orgAccountJson="\{ \"address\": \"0xabcdef1234567890\" \, \"privateKey\": \"0x1234567890abcdef\" \}"
 
@@ -89,7 +89,7 @@ Configuration for a connected environment. You will need at least these configur
     or pass the value in JSON format as base64 encoded string (`secrets.orgAccountJsonBase64`):
 
     ```bash
-    helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.11 \
+    helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.12 \
         --values my-values.yaml \
         --set-string secrets.orgAccountJsonBase64="eyAia2V5IjogInZhbHVlIiB9"
 
@@ -110,14 +110,14 @@ secrets:
 and install
 
 ```bash
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.11 \
+helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.12 \
     --values my-values.yaml
 ```
 
 or pass `secrets.orgAccountJson` as escaped string on the commandline:
 
 ```bash
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.11 \
+helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.12 \
   --set secrets.orgAccountJson="\{\"address\": \"0xb5ced4530d6ccbb31b2b542fd9b4558b52296784\"\, \"privateKey\": \"0x6b93a268f68239d321981125ecf24488920c6b3d900043d56fef66adb776abd5\"\}"
 ```
 
@@ -130,7 +130,7 @@ Run `helm upgrade --helm` for full list of options.
 You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
 ```bash
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.11 \
+helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.12 \
   --namespace=my-namespace \
   --values my-values.yaml
 ```
@@ -140,7 +140,7 @@ helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.11 
 Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
 ```bash
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.11 \
+helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.12 \
   --wait --timeout=600s \
   --values my-values.yaml
 ```
@@ -208,13 +208,13 @@ Tests can be found in [tests](./tests)
 | ingress.hosts[0].paths[0].path | string | `"/"` | The Ingress Path. See [https://kubernetes.io/docs/concepts/services-networking/ingress/#examples](https://kubernetes.io/docs/concepts/services-networking/ingress/#examples) Note: For Ingress Controllers like AWS LB Controller see their specific documentation. |
 | ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` | The type of path. This value is required since Kubernetes 1.18. For Ingress Controllers like AWS LB Controller or Traefik it is usually required to set its value to ImplementationSpecific See [https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types) and [https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/](https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/) |
 | ingress.tls | list | `[]` |  |
-| livenessProbe | object | `{"failureThreshold":3,"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"tcpSocket":{"port":"http"},"timeoutSeconds":1}` | Liveness probe. Defaults to check if the server is listening. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| livenessProbe | object | `{"failureThreshold":3,"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"tcpSocket":{"port":3000},"timeoutSeconds":1}` | Liveness probe. Defaults to check if the server is listening. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | nameOverride | string | `""` | nameOverride replaces the name of the chart in the Chart.yaml file, when this is used to construct Kubernetes object names. From [https://stackoverflow.com/questions/63838705/what-is-the-difference-between-fullnameoverride-and-nameoverride-in-helm](https://stackoverflow.com/questions/63838705/what-is-the-difference-between-fullnameoverride-and-nameoverride-in-helm) |
 | namespaceOverride | string | `""` | Override the deployment namespace. Very useful for multi-namespace deployments in combined charts |
 | nodeSelector | object | `{}` | Node Selectors in order to assign pods to certain nodes. See [https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) |
 | podAnnotations | object | `{}` | Annotations added to the pod |
 | podSecurityContext | object | `{"fsGroup":65534,"runAsGroup":65534,"runAsUser":65534}` | Security Context for the pod. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
-| readinessProbe | object | `{"failureThreshold":3,"httpGet":{"path":"/totalNumberOfAnchors/","port":"http"},"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":3}` | Readiness probe. Defaults to check if server can query data. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
+| readinessProbe | object | `{"failureThreshold":3,"httpGet":{"path":"/health","port":3000},"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":3}` | Readiness probe. Defaults to check if server can query data. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | replicaCount | int | `1` | The number of replicas if autoscaling is false |
 | resources | object | `{"limits":{"cpu":"100m","memory":"128Mi"},"requests":{"cpu":"5m","memory":"64Mi"}}` | Resource constraints for a pod |
 | secretProviderClass.apiVersion | string | `"secrets-store.csi.x-k8s.io/v1"` | API Version of the SecretProviderClass |
