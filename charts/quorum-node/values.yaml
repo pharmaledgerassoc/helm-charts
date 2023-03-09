@@ -4,7 +4,7 @@
 
 image:
   # -- The repository of the Quorum container image
-  repository: quorumengineering/quorum
+  repository: 061089524335.dkr.ecr.eu-west-1.amazonaws.com/quorum
   # -- Image Pull Policy
   pullPolicy: Always
   # -- Image tag
