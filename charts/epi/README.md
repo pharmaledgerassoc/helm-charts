@@ -1,6 +1,6 @@
 # epi
 
-![Version: 0.5.15](https://img.shields.io/badge/Version-0.5.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2023.0.1](https://img.shields.io/badge/AppVersion-2023.0.1-informational?style=flat-square)
+![Version: 0.6.0](https://img.shields.io/badge/Version-0.6.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2023.0.1](https://img.shields.io/badge/AppVersion-2023.0.1-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger epi (electronic product information) application
 
@@ -158,7 +158,7 @@ It is recommended to put non-sensitive configuration values in an configuration 
 2. Install via helm to namespace `default`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.5.15 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.0 \
         --install \
         --values my-config.yaml \
     ```
@@ -366,7 +366,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.5.15 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.0 \
         --install \
         --namespace=my-namespace \
         --values my-config.yaml \
@@ -377,7 +377,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.5.15 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.0 \
         --install \
         --wait --timeout=600s \
         --values my-config.yaml \
@@ -405,7 +405,7 @@ Tests can be found in [tests](./tests)
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| tgip-work |  | <https://github.com/tgip-work> |
+| skutner |  | <https://github.com/skutner> |
 
 ## Values
 
@@ -416,9 +416,9 @@ Tests can be found in [tests](./tests)
 | affinity | object | `{}` | Affinity for scheduling a pod. See [https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) |
 | builder.forceRun | bool | `false` | Boolean flag whether to enforce running the Builder even if it is not required. Useful for testing purpose. |
 | builder.image.pullPolicy | string | `"Always"` | Image Pull Policy for the builder. |
-| builder.image.repository | string | `"pharmaledger/epi-builder"` | The repository of the container image for the builder. |
-| builder.image.sha | string | `"7756930eecac2364ba66d052839bab512dbc5f423671c13aa5e368b313f61f60"` | sha256 digest of the image for the builder. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
-| builder.image.tag | string | `"1.3.1"` | Image tag for the builder. Default to v1.3.1 |
+| builder.image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-builder"` | The repository of the container image for the builder. |
+| builder.image.sha | string | `"c066023727de32d5768bedb6ae2b7d8f68f5f189649707e2b83fec04b96eb7e1"` | sha256 digest of the image for the builder. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
+| builder.image.tag | string | `"2023.0.4-rc1"` | Image tag for the builder. Default to v1.3.1 |
 | builder.podSecurityContext | object | `{"fsGroup":1000,"runAsGroup":1000,"runAsUser":1000}` | Pod Security Context for the builder. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
 | builder.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":false,"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000}` | Security Context for the builder container See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container) |
 | builder.sleepTime | string | `"10s"` | The time to sleep between start of apihub (npm run server) and build process (npm run build-all) |
@@ -469,14 +469,14 @@ Tests can be found in [tests](./tests)
 | persistence.existingClaim | string | `""` | The name of an existing PVC to use instead of creating a new one. |
 | persistence.finalizers | list | `["kubernetes.io/pvc-protection"]` | Finalizers for the new PVC. See [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#storage-object-in-use-protection](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#storage-object-in-use-protection) |
 | persistence.selectorLabels | object | `{}` | Selector Labels for the new PVC. See [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector) |
-| persistence.size | string | `"20Gi"` | Size of the volume for the new PVC |
+| persistence.size | string | `"100Gi"` | Size of the volume for the new PVC |
 | persistence.storageClassName | string | `""` | Name of the storage class for the new PVC. If empty or not set then storage class will not be set - which means that the default storage class will be used. |
 | resources | object | `{}` | Resource constraints for the builder and runner |
 | runner.deploymentStrategy | object | `{"type":"Recreate"}` | The strategy of the deployment for the runner. Defaults to type: Recreate as a PVC is bound to it. See `kubectl explain deployment.spec.strategy` for more and [https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) |
 | runner.image.pullPolicy | string | `"Always"` | Image Pull Policy for the runner |
-| runner.image.repository | string | `"pharmaledger/epi-runner"` | The repository of the container image for the runner |
-| runner.image.sha | string | `"d9613cbf530cf057a3a1a781ff81b491e03a2d0194165a0045bee37c1c6c57da"` | sha256 digest of the image. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
-| runner.image.tag | string | `"1.3.1"` | Overrides the image tag whose default is the chart appVersion. Default to v1.3.1 |
+| runner.image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-runner"` | The repository of the container image for the runner |
+| runner.image.sha | string | `"d6cb807c729461a93a8e20fb88004334c13ca3748d8d1f9af736d7430c60c53a"` | sha256 digest of the image. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
+| runner.image.tag | string | `"2023.0.4-rc1"` | Overrides the image tag whose default is the chart appVersion. Default to v1.3.1 |
 | runner.livenessProbe | object | `{"failureThreshold":3,"httpGet":{"httpHeaders":[{"name":"Host","value":"localhost"}],"path":"/installation-details","port":"http"},"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1}` | Liveness probe. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | runner.podAnnotations | object | `{}` | Annotations added to the runner pod |
 | runner.podSecurityContext | object | `{"fsGroup":1000,"runAsGroup":1000,"runAsUser":1000}` | Pod Security Context for the runner. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
