@@ -989,6 +989,20 @@ entries:
   ethadapter:
   - apiVersion: v2
     appVersion: 1.0.2
+    created: "2023-03-09T13:13:59.940733835Z"
+    description: A Helm chart for Pharma Ledger Ethereum Adapter Service
+    digest: 4daea727fc2e181343fb9804766781b970d2e5fa6218a91b23c6354243bac804
+    icon: https://avatars.githubusercontent.com/u/60230259?s=200&v=4
+    maintainers:
+    - name: skutner
+      url: https://github.com/skutner
+    name: ethadapter
+    type: application
+    urls:
+    - https://github.com/pharmaledgerassoc/helm-charts/releases/download/ethadapter-0.7.11/ethadapter-0.7.11.tgz
+    version: 0.7.11
+  - apiVersion: v2
+    appVersion: 1.0.2
     created: "2022-07-11T15:09:35.441124426Z"
     description: A Helm chart for Pharma Ledger Ethereum Adapter Service
     digest: b999493e3c900f0c98acce63cca07b079199bb61e25c06416a08588369b8ad42
@@ -2199,4 +2213,4 @@ entries:
     urls:
     - https://github.com/pharmaledgerassoc/helm-charts/releases/download/standalone-quorum-0.3.0/standalone-quorum-0.3.0.tgz
     version: 0.3.0
-generated: "2023-01-17T15:48:51.81803239Z"
+generated: "2023-03-09T13:13:59.941455538Z"
