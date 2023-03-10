@@ -1,6 +1,6 @@
 # epi
 
-![Version: 0.6.1](https://img.shields.io/badge/Version-0.6.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2023.0.1](https://img.shields.io/badge/AppVersion-2023.0.1-informational?style=flat-square)
+![Version: 0.6.2](https://img.shields.io/badge/Version-0.6.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2023.0.4](https://img.shields.io/badge/AppVersion-2023.0.4-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger epi (electronic product information) application
 
@@ -158,7 +158,7 @@ It is recommended to put non-sensitive configuration values in an configuration 
 2. Install via helm to namespace `default`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.1 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.2 \
         --install \
         --values my-config.yaml \
     ```
@@ -366,7 +366,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.1 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.2 \
         --install \
         --namespace=my-namespace \
         --values my-config.yaml \
@@ -377,7 +377,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.1 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.2 \
         --install \
         --wait --timeout=600s \
         --values my-config.yaml \
@@ -416,7 +416,7 @@ Tests can be found in [tests](./tests)
 | affinity | object | `{}` | Affinity for scheduling a pod. See [https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/) |
 | builder.forceRun | bool | `false` | Boolean flag whether to enforce running the Builder even if it is not required. Useful for testing purpose. |
 | builder.image.pullPolicy | string | `"Always"` | Image Pull Policy for the builder. |
-| builder.image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-builder"` | The repository of the container image for the builder. |
+| builder.image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-builder"` | The repository of the container image for the builder. <!-- # pragma: allowlist secret --> |
 | builder.image.sha | string | `"299f90ae491bf69811befd6410ea714457be968eb52431e7d8770b3c791f5dad"` | sha256 digest of the image for the builder. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
 | builder.image.tag | string | `"2023.0.4"` | Image tag for the builder. Default to v1.3.1 |
 | builder.podSecurityContext | object | `{"fsGroup":1000,"runAsGroup":1000,"runAsUser":1000}` | Pod Security Context for the builder. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
@@ -474,7 +474,7 @@ Tests can be found in [tests](./tests)
 | resources | object | `{}` | Resource constraints for the builder and runner |
 | runner.deploymentStrategy | object | `{"type":"Recreate"}` | The strategy of the deployment for the runner. Defaults to type: Recreate as a PVC is bound to it. See `kubectl explain deployment.spec.strategy` for more and [https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy) |
 | runner.image.pullPolicy | string | `"Always"` | Image Pull Policy for the runner |
-| runner.image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-runner"` | The repository of the container image for the runner |
+| runner.image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-runner"` | The repository of the container image for the runner <!-- # pragma: allowlist secret --> |
 | runner.image.sha | string | `"87767566b48971cc31e998c8cd235ccc0ca5bd2a77da1deb1e4448608bb98915"` | sha256 digest of the image. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
 | runner.image.tag | string | `"2023.0.4"` | Overrides the image tag whose default is the chart appVersion. Default to v1.3.1 |
 | runner.livenessProbe | object | `{"failureThreshold":3,"httpGet":{"httpHeaders":[{"name":"Host","value":"localhost"}],"path":"/installation-details","port":"http"},"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1}` | Liveness probe. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
