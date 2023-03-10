@@ -7,16 +7,17 @@ replicaCount: 1
 
 image:
   # -- The repository of the container image
-  repository: "061089524335.dkr.ecr.eu-west-1.amazonaws.com/ethadapter"
+  # <!-- # pragma: allowlist secret -->
+  repository: "061089524335.dkr.ecr.eu-west-1.amazonaws.com/ethadapter"  # pragma: allowlist secret
   # -- Image Pull Policy
   pullPolicy: Always
   # -- Overrides the image tag whose default is the chart appVersion.
-  tag: "1.0.7"
+  tag: "1.1.0"
   # -- sha256 digest of the image.
   # Do not add the prefix "@sha256:"
   # Default to image digest for version 1.0.2
   # <!-- # pragma: allowlist secret -->
-  sha: "5ed4cc6afce9dae81046be82c73ab3b262bc83f14a1078f675e3b8f4cb2b131b"  # pragma: allowlist secret
+  sha: "d8470b4772cc55cd1dae71f28b83c70ed4ac3ffc9027236b3061292af7af32b2"  # pragma: allowlist secret
 
 # -- Secret(s) for pulling an container image from a private registry.
 # See [https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)
