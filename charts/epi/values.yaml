@@ -77,7 +77,7 @@ runner:
   image:
     # -- The repository of the container image for the runner
     # <!-- # pragma: allowlist secret -->
-    repository: "061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-runner" # pragma: allowlist secret
+    repository: "061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-runner"  # pragma: allowlist secret
     # -- Image Pull Policy for the runner
     pullPolicy: Always
     # -- Overrides the image tag whose default is the chart appVersion.
@@ -174,7 +174,7 @@ builder:
   image:
     # -- The repository of the container image for the builder.
     # <!-- # pragma: allowlist secret -->
-    repository: "061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-builder" # pragma: allowlist secret
+    repository: "061089524335.dkr.ecr.eu-west-1.amazonaws.com/epi-builder"  # pragma: allowlist secret
     # -- Image Pull Policy for the builder.
     pullPolicy: Always
     # -- Image tag for the builder.
