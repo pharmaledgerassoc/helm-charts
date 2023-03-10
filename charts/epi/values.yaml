@@ -82,12 +82,12 @@ runner:
     pullPolicy: Always
     # -- Overrides the image tag whose default is the chart appVersion.
     # Default to v1.3.1
-    tag: "2023.0.4"  # Note to developers: If you change this version also change appVersion in Chart.yaml
+    tag: "2023.1.0"  # Note to developers: If you change this version also change appVersion in Chart.yaml
     # -- sha256 digest of the image.
     # Do not add the prefix "@sha256:"
     # Default to v1.3.1
     # <!-- # pragma: allowlist secret -->
-    sha: "87767566b48971cc31e998c8cd235ccc0ca5bd2a77da1deb1e4448608bb98915"  # pragma: allowlist secret
+    sha: "8134097371f0b8495c328f99def470c1d5dfb3f89e8ba72926f1b82681788482"  # pragma: allowlist secret
 
   # -- The number of replicas for the runner
   replicaCount: 1
@@ -179,12 +179,12 @@ builder:
     pullPolicy: Always
     # -- Image tag for the builder.
     # Default to v1.3.1
-    tag: "2023.0.4"
+    tag: "2023.1.0"
     # -- sha256 digest of the image for the builder.
     # Do not add the prefix "@sha256:"
     # Default to v1.3.1
     # <!-- # pragma: allowlist secret -->
-    sha: "299f90ae491bf69811befd6410ea714457be968eb52431e7d8770b3c791f5dad"  # pragma: allowlist secret
+    sha: "11919f8a7bda6ebff40be3148012354b2fb56b0e374610817fa7d144bfec90ec"  # pragma: allowlist secret
 
   # -- Pod Security Context for the builder.
   # See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod)
