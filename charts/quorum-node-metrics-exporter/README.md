@@ -1,6 +1,6 @@
 # quorum-node-metrics-exporter
 
-![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.2](https://img.shields.io/badge/AppVersion-v0.2-informational?style=flat-square)
+![Version: 0.2.2](https://img.shields.io/badge/Version-0.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.2](https://img.shields.io/badge/AppVersion-v0.2-informational?style=flat-square)
 
 A Helm chart for [quorum-node-metrics-exporter](https://github.com/pharmaledgerassoc/quorum-node-metrics-exporter)
 
@@ -70,7 +70,7 @@ A Helm chart for [quorum-node-metrics-exporter](https://github.com/pharmaledgera
 4. Install the helm release - **IMPORTANT** You must install the metrics into the same namespace like the Quorum node.
 
     ```shell
-    helm upgrade metrics-exporter pharmaledgerassoc/quorum-node-metric-exporter --version=0.2.1 \
+    helm upgrade metrics-exporter pharmaledgerassoc/quorum-node-metric-exporter --version=0.2.2 \
       --install \
       --namespace=quorum \
       --values ./my-values.yaml
@@ -86,7 +86,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade metrics-exporter pharmaledgerassoc/quorum-node-metric-exporter --version=0.2.1 \
+    helm upgrade metrics-exporter pharmaledgerassoc/quorum-node-metric-exporter --version=0.2.2 \
       --install \
       --wait --timeout=600s \
       --namespace=quorum \

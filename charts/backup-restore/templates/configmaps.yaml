@@ -1,5 +1,0 @@
-{{- /*
-Create Configmaps from templates
-*/}}
-
-{{- include "backup-restore.configmap-server-config" (list $ . "" (dict)) }}
