@@ -17,7 +17,7 @@ config:
   # -- Secret Pass Phrase for de/encrypting private keys for application wallets created by builder.
   buildSecretKey: ""
   # -- The epi version
-  epiVersion: "1.6.0"
+  epiVersion: "2023.1.0"
   overrides:
     # -- Option to explicitly override the environment.js file used for demiurge-wallet instead of using the predefined template.
     # Note: Usually not required
@@ -87,7 +87,7 @@ runner:
     # Do not add the prefix "@sha256:"
     # Default to v1.3.1
     # <!-- # pragma: allowlist secret -->
-    sha: "8134097371f0b8495c328f99def470c1d5dfb3f89e8ba72926f1b82681788482"  # pragma: allowlist secret
+    sha: "407dad9208fd36aca61c76cca7bdca6ba4ce97552e783064c4d8e98be1ceb36c"  # pragma: allowlist secret
 
   # -- The number of replicas for the runner
   replicaCount: 1
@@ -184,7 +184,7 @@ builder:
     # Do not add the prefix "@sha256:"
     # Default to v1.3.1
     # <!-- # pragma: allowlist secret -->
-    sha: "11919f8a7bda6ebff40be3148012354b2fb56b0e374610817fa7d144bfec90ec"  # pragma: allowlist secret
+    sha: "e5bc197b1fc44925b1ff9e9a2cc04831eaa708e87a2ca1d8b7790631f1372776"  # pragma: allowlist secret
 
   # -- Pod Security Context for the builder.
   # See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod)
