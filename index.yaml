@@ -463,6 +463,21 @@ entries:
   epi:
   - apiVersion: v2
     appVersion: 2023.1.0
+    created: "2023-03-28T15:24:02.248874454Z"
+    description: A Helm chart for Pharma Ledger epi (electronic product information)
+      application
+    digest: f36fcd17e04ddc5b0c20d943d45aa1db07b601298254fefc267f3045bbf37d60
+    icon: https://avatars.githubusercontent.com/u/60230259?s=200&v=4
+    maintainers:
+    - name: skutner
+      url: https://github.com/skutner
+    name: epi
+    type: application
+    urls:
+    - https://github.com/pharmaledgerassoc/helm-charts/releases/download/epi-0.6.5/epi-0.6.5.tgz
+    version: 0.6.5
+  - apiVersion: v2
+    appVersion: 2023.1.0
     created: "2023-03-10T12:24:14.978957286Z"
     description: A Helm chart for Pharma Ledger epi (electronic product information)
       application
@@ -1017,6 +1032,20 @@ entries:
     - https://github.com/pharmaledgerassoc/helm-charts/releases/download/epi-0.2.0/epi-0.2.0.tgz
     version: 0.2.0
   ethadapter:
+  - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2023-03-28T15:24:02.397331436Z"
+    description: A Helm chart for Pharma Ledger Ethereum Adapter Service
+    digest: 4e9820adf64f62535166268347fb3da32a05b6ea72f29bcd1dcc78b521074792
+    icon: https://avatars.githubusercontent.com/u/60230259?s=200&v=4
+    maintainers:
+    - name: skutner
+      url: https://github.com/skutner
+    name: ethadapter
+    type: application
+    urls:
+    - https://github.com/pharmaledgerassoc/helm-charts/releases/download/ethadapter-0.7.14/ethadapter-0.7.14.tgz
+    version: 0.7.14
   - apiVersion: v2
     appVersion: 1.1.0
     created: "2023-03-10T12:18:36.467574348Z"
@@ -2282,4 +2311,4 @@ entries:
     urls:
     - https://github.com/pharmaledgerassoc/helm-charts/releases/download/standalone-quorum-0.3.0/standalone-quorum-0.3.0.tgz
     version: 0.3.0
-generated: "2023-03-10T12:24:14.980752174Z"
+generated: "2023-03-28T15:24:02.398301175Z"
