@@ -1,6 +1,6 @@
 # quorum-node
 
-![Version: 0.6.6](https://img.shields.io/badge/Version-0.6.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0](https://img.shields.io/badge/AppVersion-23.4.0-informational?style=flat-square)
+![Version: 0.6.8](https://img.shields.io/badge/Version-0.6.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0](https://img.shields.io/badge/AppVersion-23.4.0-informational?style=flat-square)
 
 A Helm chart for the deployment of the quorum node on Kubernetes supporting new-network, join-network and update-partners-info use cases.
 
@@ -39,13 +39,13 @@ See [Changelog](./CHANGELOG.md) for significant changes!
 These four installation samples demonstrate
 
 1. the different use case combinations
-2. how to pass the configuration settings provided by the plugin which is located [here](https://github.com/pharmaledgerassoc/helm-plugins.git).
+2. how to pass the configuration settings provided by the plugin which is located [here](https://github.com/axiologic-pla/helm-plugins.git).
 
 **Note:** In case you are using the plugin mechanism, read the details about operating the plugin which can be found in the specific use case documentation.
 
 ### Option 1: Join Network followed by updating the PartnerInfo
 
-The **most common option** is to [join an existing network](../../usecases/join-network/readme.md) and to [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - which proposes PartnerNodes to Validators.
+The **most common option** is to [join an existing network](../../usecases/join-network/readme.md) and to [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - with possibility  to propose PartnerNodes to Validators.
 
 Also see **[Full Sample](./docs/full_sample/README.md)**.
 
@@ -59,10 +59,12 @@ use_case:
 use_case:
   updatePartnersInfo:
     enabled: true
+  promoteValidators:
+    enabled: true      
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.8 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json \
@@ -87,7 +89,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.8 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
@@ -96,7 +98,7 @@ helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6
 
 ### Option 3: New Network followed by updating the PartnerInfo
 
-Create a [New network](../../usecases/new-network/readme.md) and [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - which proposes PartnerNodes to Validators.
+Create a [New network](../../usecases/new-network/readme.md) and [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - with possibility  to propose PartnerNodes to Validators.
 
 ```yaml
 use_case:
@@ -108,10 +110,12 @@ use_case:
 use_case:
   updatePartnersInfo:
     enabled: true
+  promoteValidators:
+    enabled: true       
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.8 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json \
@@ -136,7 +140,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.8 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json
@@ -161,7 +165,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.6 \
+    helm upgrade my-release-name axiologic-pla/quorum-node --version=0.6.8 \
       --install \
       --namespace=my-namespace \
       --values my-values.yaml \
@@ -172,7 +176,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.6 \
+    helm upgrade my-release-name axiologic-pla/quorum-node --version=0.6.8 \
       --install \
       --wait --timeout=600s \
       --values my-values.yaml \
@@ -200,7 +204,7 @@ helm delete quorum-node-0 \
 | fullnameOverride | string | `""` | Override the full name |
 | image.pullPolicy | string | `"Always"` | Image Pull Policy |
 | image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/quorum"` | The repository of the Quorum container image |
-| image.sha | string | `"7614e22e0c27732973caca398184b42a013d87ed23b50c536cb21f709668b82d"` | sha256 digest of the image. Do not add the prefix "@sha256:". Defaults to the digest of tag "23.4.0" <!-- # pragma: allowlist secret --> |
+| image.sha | string | `"30a4c942da7bbc94a1c1b59caa28859fc8c75470399175f5b664522ea1b3d7ee"` | sha256 digest of the image. Do not add the prefix "@sha256:". <!-- # pragma: allowlist secret --> |
 | image.tag | string | `"23.4.0"` | Image tag |
 | imagePullSecrets | list | `[]` | Secret(s) for pulling an container image from a private registry. See [https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
 | kubectl.image.pullPolicy | string | `"Always"` | Image Pull Policy |
@@ -290,6 +294,7 @@ helm delete quorum-node-0 \
 | use_case.newNetwork.enabled | bool | `true` | Enable the new-network use case. Can only be used in collaboration with updatePartnerInfo use case |
 | use_case.newNetwork.plugin_data_common | string | `"{\n  \"extradata\": \"newNetwork_extradata\",\n  \"enode\": \"newNetwork_Enode\",\n  \"nodeKeyPublic\": \"newNetwork_NodeKeyPublic\",\n  \"genesisAccount\": \"newNetwork_genesisAccount\"\n}"` |  |
 | use_case.newNetwork.plugin_data_secrets | string | `"{\n  \"genesisKeyStoreAccount\": \"ewogICAgImFkZHJlc3MiOiAidGVzdGRhdGEiLAogICAgImNyeXB0byI6IHsKICAgICAgICAiY2lwaGVyIjogImFlcy0xMjgtY3RyIiwKICAgICAgICAiY2lwaGVydGV4dCI6ICJ0ZXN0ZGF0YSIsCiAgICAgICAgImNpcGhlcnBhcmFtcyI6IHsKICAgICAgICAgICAgIml2IjogInRlc3RkYXRhIgogICAgICAgIH0sCiAgICAgICAgIm1hYyI6ICJ0ZXN0ZGF0YSIsCiAgICAgICAgImtkZiI6ICJzY3J5cHQiLAogICAgICAgICJrZGZwYXJhbXMiOiB7CiAgICAgICAgICAgICJka2xlbiI6IDMyLAogICAgICAgICAgICAibiI6IDI2MjE0NCwKICAgICAgICAgICAgInIiOiA4LAogICAgICAgICAgICAicCI6IDEsCiAgICAgICAgICAgICJzYWx0IjogInRlc3RkYXRhIgogICAgICAgIH0KICAgIH0sCiAgICAiaWQiOiAidGVzdGRhdGEiLAogICAgInZlcnNpb24iOiAzCn0=\",\n  \"nodeKey\": \"newNetwork_NodeKey\"\n}"` | Sensitive data. A JSON object containing two attributes: 1. "genesisKeyStoreAccount" = a base64 encoded value. 2. "nodeKey" = The secret private node key. <!-- pragma: allowlist secret --> |
+| use_case.promoteValidators.enabled | bool | `false` | Enable post update job for promoting all peers listed in updatePartnersInfo to be promoted to validators Default false |
 | use_case.updatePartnersInfo.enabled | bool | `false` | Enable the update-partners-info use case. Can only be used in collaboration with new-network or join-network use case. |
 | use_case.updatePartnersInfo.plugin_data_common | string | `"{\n  \"peers\": [\n    {\n      \"enode\": \"peer1_enode\",\n      \"enodeAddress\": \"peer1_enodeAddress\",\n      \"enodeAddressPort\": \"peer1_enodeAddressPort\",\n      \"nodeKeyPublic\": \"peer1_nodeKeyPublic\"\n    },\n    {\n      \"enode\": \"peer2_enode\",\n      \"enodeAddress\": \"peer2_enodeAddress\",\n      \"enodeAddressPort\": \"peer2_enodeAddressPort\",\n      \"nodeKeyPublic\": \"peer2_nodeKeyPublic\"\n    }\n  ]\n}"` |  |
 

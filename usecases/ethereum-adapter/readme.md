@@ -25,7 +25,7 @@ cd network_name/charts/ethereum-adapter
 
 1. Register the official, or the forked helm charts repository
 ```shell
-helm repo add helm-charts https://raw.githubusercontent.com/pharmaledgerassoc/helm-charts/master/charts/releases
+helm repo add helm-charts https://raw.githubusercontent.com/axiologic-pla/helm-charts/master/charts/releases
 ```
 2. Install the helm chart _ethereum-adapter_
 ```shell
@@ -33,7 +33,7 @@ helm pull helm-charts/ethereum-adapter --untar
 ```
 3. Install the _ethereum-adapter_ plugin
 ```shell
-helm plugin install https://github.com/pharmaledgerassoc/helm-plugins
+helm plugin install https://github.com/axiologic-pla/helm-plugins
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/ethereum-adapter/eth-adapter-values.yaml
@@ -78,7 +78,7 @@ helm pl-plugin --ethAdapter -i ./eth-adapter-values.yaml -o .
 
 2. Install the helm chart
 ```shell
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter -f ./eth-adapter-values.yaml --set-file config.smartContractInfo=./eth-adapter.plugin.json,secrets.orgAccountJson=./orgAccount.json
+helm upgrade --install ethadapter axiologic-pla/ethadapter -f ./eth-adapter-values.yaml --set-file config.smartContractInfo=./eth-adapter.plugin.json,secrets.orgAccountJson=./orgAccount.json
 ```
 
 #### Step 5: Backup your installation and private information

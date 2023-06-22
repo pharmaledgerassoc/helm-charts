@@ -140,7 +140,7 @@ resource "helm_release" "main" {
   name      = "quorum-node-0"
   namespace = var.namespace
 
-  repository = "https://pharmaledgerassoc.github.io/helm-charts"
+  repository = "https://axiologic-pla.github.io/helm-charts"
   chart      = "quorum-node"
   version    = "0.5.0"
 

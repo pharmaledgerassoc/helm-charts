@@ -26,7 +26,7 @@ metadata:
   labels:
     {{- include "epi.labels" . | nindent 4 }}
 data:
-  # Mapped to https://github.com/pharmaledgerassoc/epi-workspace/tree/v1.3.0/apihub-root/external-volume/config/domains
+  # Mapped to https://github.com/axiologic-pla/epi-workspace/tree/v1.3.0/apihub-root/external-volume/config/domains
   # e.g. 'epipoc.json'
   {{ required "config.domain must be set" .Values.config.domain }}.json: |-
 {{- if .Values.config.overrides.domainConfigJson }}
@@ -57,7 +57,7 @@ data:
     }
 {{- end }}
 
-  # Mapped to https://github.com/pharmaledgerassoc/epi-workspace/tree/v1.3.0/apihub-root/external-volume/config/domains
+  # Mapped to https://github.com/axiologic-pla/epi-workspace/tree/v1.3.0/apihub-root/external-volume/config/domains
   # e.g. 'companyname.json'
   {{ required "config.subDomain must be set" .Values.config.subDomain }}.json: |-
 {{- if .Values.config.overrides.subDomainConfigJson }}
@@ -80,7 +80,7 @@ data:
     }
 {{- end }}
 
-  # Mapped to https://github.com/pharmaledgerassoc/epi-workspace/tree/v1.3.0/apihub-root/external-volume/config/domains
+  # Mapped to https://github.com/axiologic-pla/epi-workspace/tree/v1.3.0/apihub-root/external-volume/config/domains
   # e.g. 'vault.companyname.json'
   {{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json: |-
 {{- if .Values.config.overrides.vaultDomainConfigJson }}

@@ -49,7 +49,7 @@ config:
     # Note 2: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault.
     envJson: ""
 
-    # -- Option to explitly set the apihub.json instead of using the default from [https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json).
+    # -- Option to explitly set the apihub.json instead of using the default from [https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json](https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json).
     # Note: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault.
     # <br/>
     # Settings: [https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3](https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3)

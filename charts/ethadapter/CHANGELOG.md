@@ -18,4 +18,4 @@
 
 - From 0.2.x to 0.3.x
   - Value `config.rpcAddress` has changed from `http://quorum-member1.quorum:8545` to `http://quorum-validator1.quorum:8545`.
-  This reflects the change of chart [standalone-quorum](https://github.com/pharmaledgerassoc/helmchart-ethadapter/tree/standalone-quorum-0.2.0/charts/standalone-quorum#changelog) from version 0.1.x to 0.2.x where member nodes are not enabled by default.
+  This reflects the change of chart [standalone-quorum](https://github.com/axiologic-pla/helmchart-ethadapter/tree/standalone-quorum-0.2.0/charts/standalone-quorum#changelog) from version 0.1.x to 0.2.x where member nodes are not enabled by default.

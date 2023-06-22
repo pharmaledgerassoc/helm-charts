@@ -3,7 +3,7 @@
 Deploy a quorum blockchain node using the shared information from a configuration repository. After the deployment, the public node information is uploaded to a chosen repository
 
 [Chart name: quorum-node](../../charts/quorum-node)<br/>
-[Plugin : join-network](https://github.com/pharmaledgerassoc/helm-plugins)
+[Plugin : join-network](https://github.com/axiologic-pla/helm-plugins)
 
 ## Quorum node deployment
 
@@ -30,15 +30,15 @@ cd network_name/charts/quorum-node
 
 1. Register the official, or the forked helm charts repository
 ```shell
-helm repo add pharmaledgerassoc https://pharmaledgerassoc.github.io/helm-charts
+helm repo add axiologic-pla https://axiologic-pla.github.io/helm-charts
 ```
 2. Download the values for the helm chart _quorum-node_
 ```shell
-helm show values pharmaledgerassoc/quorum-node > my-values.yaml
+helm show values axiologic-pla/quorum-node > my-values.yaml
 ```
 3. Install the _pl-plugin_ plugin
 ```shell
-helm plugin install https://github.com/pharmaledgerassoc/helm-plugins
+helm plugin install https://github.com/axiologic-pla/helm-plugins
 ```
 
 ### Step 3: Adjust private_configs/network_name/charts/quorum-node/my-values.yaml
@@ -81,8 +81,8 @@ git_upload:
 Example
 ```yaml
 git_shared_configuration:
-  # -- shared github repository name eg. pharmaledgerassoc/epi-shared-configuration
-  repository_name: "pharmaledgerassoc/epi-shared-configuration"
+  # -- shared github repository name eg. axiologic-pla/epi-shared-configuration
+  repository_name: "axiologic-pla/epi-shared-configuration"
   # -- github read-write token
   read_write_token: "git hub read write token"
 ```
@@ -112,7 +112,7 @@ deployment:
    1. _join-network.plugin.json_ file that will contain all the generated information, like account, node public crypto data and downloaded genesis data. The json file will be used by the helm charts. This file will be preserved in the private repository.
       This file is also used in two ways:
       1. to generate the configmaps for the deployment of the Quorum Node (see step 4.2)
-      2. in the post-install step of the helm chart (in 4.2) to generate shared configurations and upload it in the shared repository (documented in https://github.com/pharmaledgerassoc/helm-charts/blob/master/charts/read.me)
+      2. in the post-install step of the helm chart (in 4.2) to generate shared configurations and upload it in the shared repository (documented in https://github.com/axiologic-pla/helm-charts/blob/master/charts/read.me)
 
    3. _join-network.plugin.secrets.json_ file that will contain all the private information like private keys/passwords/etc. of the blockchain node. This file will be preserved in the private repository.
 
@@ -122,7 +122,7 @@ helm pl-plugin --joinNetwork -i ./my-values.yaml -o .
 
 2. Install the helm chart
 ```shell
-helm upgrade --install qn-0 pharmaledgerassoc/quorum-node -f ./my-values.yaml --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json,use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
+helm upgrade --install qn-0 axiologic-pla/quorum-node -f ./my-values.yaml --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json,use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
 ```
 3. Upload shared data to the shared-repository
 
@@ -162,7 +162,7 @@ cd network_name/charts/quorum-node
 
 1. Execute:
 ```shell
-helm repo update pharmaledgerassoc
+helm repo update axiologic-pla
 ```
 
 ### Step 3: Adjust private_configs/network_name/charts/quorum-node/my-values.yaml
@@ -175,7 +175,7 @@ helm repo update pharmaledgerassoc
 1. Upgrade the installation using the helm chart
 
 ```shell
-helm upgrade --install qn-0 pharmaledgerassoc/quorum-node -f ./my-values.yaml --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json,use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
+helm upgrade --install qn-0 axiologic-pla/quorum-node -f ./my-values.yaml --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json,use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
 ```
 
 If the setting git_upload.enabled is _true_, then the changed files are uploaded by the deployment process. Otherwise, the changes in the shared repository must be done by using other means.

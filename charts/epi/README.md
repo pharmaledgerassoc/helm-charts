@@ -1,6 +1,6 @@
 # epi
 
-![Version: 0.6.5](https://img.shields.io/badge/Version-0.6.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2023.1.0](https://img.shields.io/badge/AppVersion-2023.1.0-informational?style=flat-square)
+![Version: 0.6.6](https://img.shields.io/badge/Version-0.6.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2023.1.0](https://img.shields.io/badge/AppVersion-2023.1.0-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger epi (electronic product information) application
 
@@ -38,7 +38,7 @@ A Helm chart for Pharma Ledger epi (electronic product information) application
   - Uses Helm hooks for Init and Cleanup
   - Optimized Build process: SeedsBackup will only be created if the underlying Container image has changed, e.g. in case of an upgrade!
   - Readiness probe implemented. Application container is considered as *ready* after build process has been finished.
-  - Value `config.ethadapterUrl` has changed from `https://ethadapter.my-company.com:3000` to `http://ethadapter.ethadapter:3000` in order to reflect changes in [ethadapter](https://github.com/pharmaledgerassoc/helmchart-ethadapter/tree/epi-improve-build/charts/ethadapter).
+  - Value `config.ethadapterUrl` has changed from `https://ethadapter.my-company.com:3000` to `http://ethadapter.ethadapter:3000` in order to reflect changes in [ethadapter](https://github.com/axiologic-pla/helmchart-ethadapter/tree/epi-improve-build/charts/ethadapter).
   - Value `persistence.storageClassName` has changed from `gp2` to empty string `""` in order to remove pre-defined setting for AWS and to be cloud-agnostic by default.
   - Configurable sleep time between start of apihub and build process (`config.sleepTime`).
   - Configuration options for PersistentVolumeClaim
@@ -158,7 +158,7 @@ It is recommended to put non-sensitive configuration values in an configuration 
 2. Install via helm to namespace `default`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.5 \
+    helm upgrade my-release-name axiologic-pla/epi --version=0.6.6 \
         --install \
         --values my-config.yaml \
     ```
@@ -263,7 +263,7 @@ More information can be found here:
 
 Sample for AWS:
 
-1. Prepare `env.json` and `apihub.json` files. See [here](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json) and [here](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/env.json) for templates.
+1. Prepare `env.json` and `apihub.json` files. See [here](https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json) and [here](https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/env.json) for templates.
 2. Create a new Secret in Secrets Manager with two keys `envJson` and `apihubJson`. Note: If you want to create the secret as PlainText, then you must encode the values to JSON String each!
 
     Sample:
@@ -366,7 +366,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.5 \
+    helm upgrade my-release-name axiologic-pla/epi --version=0.6.6 \
         --install \
         --namespace=my-namespace \
         --values my-config.yaml \
@@ -377,7 +377,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.5 \
+    helm upgrade my-release-name axiologic-pla/epi --version=0.6.6 \
         --install \
         --wait --timeout=600s \
         --values my-config.yaml \
@@ -428,7 +428,7 @@ Tests can be found in [tests](./tests)
 | config.domain | string | `"epipoc"` | The Domain, e.g. "epipoc" |
 | config.epiVersion | string | `"2023.1.0"` | The epi version |
 | config.ethadapterUrl | string | `"http://ethadapter.ethadapter:3000"` | The Full URL of the Ethadapter including protocol and port, e.g. "https://ethadapter.my-company.com:3000" |
-| config.overrides.apihubJson | string | `""` | Option to explitly set the apihub.json instead of using the default from [https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json). Note: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault. <br/> Settings: [https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3](https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3) <br/> For SSO (not enabled by default): <br/> 1. "enableOAuth": true <br/> 2. "serverAuthentication": true <br/> 3. For SSO via OAuth with Azure AD, replace <TODO_*> with appropriate values.    For other identity providers (IdP) (e.g. Google, Ping, 0Auth), refer to documentation.    "redirectPath" must match the redirect URL configured at IdP <br/> 4. Add these values to "skipOAuth": "/leaflet-wallet/", "/directory-summary/", "/iframe/" |
+| config.overrides.apihubJson | string | `""` | Option to explitly set the apihub.json instead of using the default from [https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json](https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json). Note: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault. <br/> Settings: [https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3](https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3) <br/> For SSO (not enabled by default): <br/> 1. "enableOAuth": true <br/> 2. "serverAuthentication": true <br/> 3. For SSO via OAuth with Azure AD, replace <TODO_*> with appropriate values.    For other identity providers (IdP) (e.g. Google, Ping, 0Auth), refer to documentation.    "redirectPath" must match the redirect URL configured at IdP <br/> 4. Add these values to "skipOAuth": "/leaflet-wallet/", "/directory-summary/", "/iframe/" |
 | config.overrides.bdnsHosts | string | `""` | Centrally managed and provided BDNS Hosts Config. You must set this value in a non-sandbox environment! See [templates/_configmap-bdns.tpl](templates/_configmap-bdns.tpl) for default value. |
 | config.overrides.demiurgeEnvironmentJs | string | `""` | Option to explicitly override the environment.js file used for demiurge-wallet instead of using the predefined template. Note: Usually not required |
 | config.overrides.domainConfigJson | string | `""` | Option to explicitly override the config.json used for the domain instead of using the predefined template. Note: Usually not required |

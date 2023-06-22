@@ -11,10 +11,10 @@ This is the new home of Helm Charts for Pharma Ledger.
 Add the repo as follow
 
 ```bash
-helm repo add pharmaledgerassoc https://pharmaledgerassoc.github.io/helm-charts
+helm repo add axiologic-pla https://axiologic-pla.github.io/helm-charts
 ```
 
-Then you can run `helm search repo pharmaledgerassoc` to see the chart(s). On installation use the `--version` flag to specify a chart version.
+Then you can run `helm search repo axiologic-pla` to see the chart(s). On installation use the `--version` flag to specify a chart version.
 
 ## Development
 

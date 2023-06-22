@@ -17,7 +17,7 @@ git_upload:
   email: "xxx@yyy.zz"
   # The user used by the git in order to upload the data
   user: "xyz"
-  # The repository url eg. https://GITHUB-TOKEN:x-oauth-basic@github.com/pharmaledgerassoc/helm-charts.git
+  # The repository url eg. https://GITHUB-TOKEN:x-oauth-basic@github.com/axiologic-pla/helm-charts.git
   git_repo_with_access_token: ""
 
 use_case:

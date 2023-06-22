@@ -26,7 +26,7 @@ metadata:
   labels:
     {{- include "epi.labels" . | nindent 4 }}
 data:
-  # See https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.0/apihub-root/external-volume/config/bdns.hosts
+  # See https://github.com/axiologic-pla/epi-workspace/blob/v1.3.0/apihub-root/external-volume/config/bdns.hosts
   bdns.hosts: |-
 {{- if .Values.config.overrides.bdnsHosts }}
 {{ .Values.config.overrides.bdnsHosts | indent 4 }}

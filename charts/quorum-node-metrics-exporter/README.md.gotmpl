@@ -27,7 +27,7 @@
 
 ## Installing the Chart
 
-1. Build a container image for [quorum-node-metrics-exporter](https://github.com/pharmaledgerassoc/quorum-node-metrics-exporter)
+1. Build a container image for [quorum-node-metrics-exporter](https://github.com/axiologic-pla/quorum-node-metrics-exporter)
 2. Push the image to repository
 3. Prepare the `my-values.yaml`
 
@@ -70,7 +70,7 @@
 4. Install the helm release - **IMPORTANT** You must install the metrics into the same namespace like the Quorum node.
 
     ```shell
-    helm upgrade metrics-exporter pharmaledgerassoc/quorum-node-metric-exporter --version={{ template "chart.version" . }} \
+    helm upgrade metrics-exporter axiologic-pla/quorum-node-metric-exporter --version={{ template "chart.version" . }} \
       --install \
       --namespace=quorum \
       --values ./my-values.yaml
@@ -86,7 +86,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade metrics-exporter pharmaledgerassoc/quorum-node-metric-exporter --version={{ template "chart.version" . }} \
+    helm upgrade metrics-exporter axiologic-pla/quorum-node-metric-exporter --version={{ template "chart.version" . }} \
       --install \
       --wait --timeout=600s \
       --namespace=quorum \

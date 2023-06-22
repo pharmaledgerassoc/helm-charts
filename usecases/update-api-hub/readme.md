@@ -25,7 +25,7 @@ cd network_name/charts/epi-update-api-hub-info
 
 1. Register the official, or the forked helm charts repository
 ```shell
-helm repo add helm-charts https://raw.githubusercontent.com/pharmaledgerassoc/helm-charts/master/charts/releases
+helm repo add helm-charts https://raw.githubusercontent.com/axiologic-pla/helm-charts/master/charts/releases
 ```
 2. Install the helm chart _update-api-hub-info_
 ```shell
@@ -33,7 +33,7 @@ helm pull helm-charts/update-api-hub-info --untar
 ```
 3. Install the _update-api-hub-info_ plugin
 ```shell
-helm plugin install https://github.com/pharmaledgerassoc/helm-charts/plugins/update-api-hub-info
+helm plugin install https://github.com/axiologic-pla/helm-charts/plugins/update-api-hub-info
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/epi-update-api-hub-info/update-api-hub-info/values.yaml

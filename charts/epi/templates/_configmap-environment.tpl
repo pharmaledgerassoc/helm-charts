@@ -26,7 +26,7 @@ metadata:
   labels:
     {{- include "epi.labels" . | nindent 4 }}
 data:
-  # https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.0/trust-loader-config/demiurge-wallet/loader/environment.js
+  # https://github.com/axiologic-pla/epi-workspace/blob/v1.3.0/trust-loader-config/demiurge-wallet/loader/environment.js
   demiurge-environment.js: |-
 {{- if .Values.config.overrides.demiurgeEnvironmentJs }}
 {{ .Values.config.overrides.demiurgeEnvironmentJs | indent 4 }}
@@ -47,7 +47,7 @@ data:
     }
 {{- end }}
 
-  # https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.0/trust-loader-config/dsu-explorer/loader/environment.js
+  # https://github.com/axiologic-pla/epi-workspace/blob/v1.3.0/trust-loader-config/dsu-explorer/loader/environment.js
   dsu-explorer-environment.js: |-
 {{- if .Values.config.overrides.dsuExplorerEnvironmentJs }}
 {{ .Values.config.overrides.dsuExplorerEnvironmentJs | indent 4 }}
@@ -68,7 +68,7 @@ data:
     }
 {{- end }}
 
-  # https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.0/trust-loader-config/dsu-fabric-wallet/loader/environment.js
+  # https://github.com/axiologic-pla/epi-workspace/blob/v1.3.0/trust-loader-config/dsu-fabric-wallet/loader/environment.js
   dsu-fabric-environment.js: |-
 {{- if .Values.config.overrides.dsuFabricEnvironmentJs }}
 {{ .Values.config.overrides.dsuFabricEnvironmentJs | indent 4 }}
@@ -96,7 +96,7 @@ data:
     }
 {{- end }}
 
-  # https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.0/trust-loader-config/leaflet-wallet/loader/environment.js
+  # https://github.com/axiologic-pla/epi-workspace/blob/v1.3.0/trust-loader-config/leaflet-wallet/loader/environment.js
   leaflet-environment.js: |-
 {{- if .Values.config.overrides.leafletEnvironmentJs }}
 {{ .Values.config.overrides.leafletEnvironmentJs | indent 4 }}
@@ -131,7 +131,7 @@ data:
       "epiDomain":  {{ required "config.domain must be set" .Values.config.domain | quote}},
       "epiProtocolVersion": 1,
       "appBuildVersion": {{ required "config.epiVersion must be set" .Values.config.epiVersion | quote}}
-      "bdnsUrl": "https://raw.githubusercontent.com/pharmaledgerassoc/mobile-bdns/master/bdns.json"
+      "bdnsUrl": "https://raw.githubusercontent.com/axiologic-pla/mobile-bdns/master/bdns.json"
     }
 {{- end }}
 

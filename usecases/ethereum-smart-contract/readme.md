@@ -23,7 +23,7 @@ cd network_name/charts/smart-contract
 #### Step 2: Install the helm plugin
 Install the _smart-contract_ plugin
 ```shell
-helm plugin install https://github.com/pharmaledgerassoc/helm-plugins
+helm plugin install https://github.com/axiologic-pla/helm-plugins
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/smart-contract/smart-contract.yaml
@@ -37,7 +37,7 @@ Example :
 smart_contracts:
    - git_upload_smart_contract_filename: "anchoring.json"
      smart_contract_name: "anchoring"
-     smart_contract_location: "https://raw.githubusercontent.com/pharmaledgerassoc/eth-adapter/master/SmartContracts/contracts/Anchoring.sol"
+     smart_contract_location: "https://raw.githubusercontent.com/axiologic-pla/eth-adapter/master/SmartContracts/contracts/Anchoring.sol"
 
 git_upload:
    # --  Enable the automatic upload to the use case shared repository of the shareable data

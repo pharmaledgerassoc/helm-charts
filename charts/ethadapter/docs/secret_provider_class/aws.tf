@@ -132,7 +132,7 @@ module "iam_role" {
 }
 
 locals {
-  # Use Abi from https://github.com/pharmaledgerassoc/eth-adapter/blob/d7e80cd2271f0963801d044497f20290f2ae5857/EthAdapter/k8s/ethadapter-configmap.yaml#L8
+  # Use Abi from https://github.com/axiologic-pla/eth-adapter/blob/d7e80cd2271f0963801d044497f20290f2ae5857/EthAdapter/k8s/ethadapter-configmap.yaml#L8
   smartContractInfo = {
     address = var.smartContractAddress
     abi     = <<EOF
@@ -146,7 +146,7 @@ resource "helm_release" "main" {
   name      = "ethadapter"
   namespace = var.namespace
 
-  repository = "https://pharmaledgerassoc.github.io/helm-charts"
+  repository = "https://axiologic-pla.github.io/helm-charts"
   chart      = "ethadapter"
   version    = "0.7.6"
 

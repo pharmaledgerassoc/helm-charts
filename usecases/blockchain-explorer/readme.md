@@ -25,7 +25,7 @@ cd network_name/charts/blockchain-explorer-deployment
 
 1. Register the official, or the forked helm charts repository
 ```shell
-helm repo add helm-charts https://raw.githubusercontent.com/pharmaledgerassoc/helm-charts/master/charts/releases
+helm repo add helm-charts https://raw.githubusercontent.com/axiologic-pla/helm-charts/master/charts/releases
 ```
 2. Install the helm chart _quorum-blockchain-explorer_
 ```shell

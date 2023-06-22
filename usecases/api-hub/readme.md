@@ -25,12 +25,12 @@ cd network_name
 
 1. Execute
 ```shell
-helm repo update pharmaledgerassoc
+helm repo update axiologic-pla
 ```
 
 2.Download the values for the helm chart network_name
 ```shell
-helm show values pharmaledgerassoc/network_name > my-values.yaml
+helm show values axiologic-pla/network_name > my-values.yaml
 ```
 
 
@@ -47,7 +47,7 @@ The file contains parametrization for different sets of values:
 
 1. Install the helm chart
 ```shell
-helm upgrade --install network-name pharmaledgerassoc/network-name -f ./my-values.yaml
+helm upgrade --install network-name axiologic-pla/network-name -f ./my-values.yaml
 ```
 
 #### Step 5: Backup your installation and private information

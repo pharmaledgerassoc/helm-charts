@@ -153,7 +153,7 @@ Configuration env.json
 
 {{/*
 Configuration apihub.json.
-Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json
+Taken from https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json
 */}}
 {{- define "epi.apihubJson" -}}
 {

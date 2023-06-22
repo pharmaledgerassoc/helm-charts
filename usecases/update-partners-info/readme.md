@@ -27,7 +27,7 @@ cd network_name/charts/quorum-node
 
 1. Execute:
 ```shell
-helm repo update pharmaledgerassoc
+helm repo update axiologic-pla
 ```
 
 #### Step 3: Adjust private_configs/network_name/charts/quorum-node/my-values.yaml
@@ -50,8 +50,8 @@ use_case:
 Example
 ```yaml
 git_shared_configuration:
-  # -- shared github repository name eg. pharmaledgerassoc/epi-shared-configuration
-  repository_name: "pharmaledgerassoc/epi-shared-configuration"
+  # -- shared github repository name eg. axiologic-pla/epi-shared-configuration
+  repository_name: "axiologic-pla/epi-shared-configuration"
   # -- github read-write token
   read_write_token: "git hub read write token"
 ```
@@ -73,13 +73,13 @@ helm pl-plugin --updatePartnersInfo -i ./my-values.yaml -o .
 2.1 Upgraded installation is of use case type **new-network**
   
 ```shell
-helm upgrade --install qn-0 pharmaledgerassoc/quorum-node -f ./my-values.yaml --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json,use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json,use_case.updatePartnersInfo.plugin_data_common=./update-partners-info.plugin.json
+helm upgrade --install qn-0 axiologic-pla/quorum-node -f ./my-values.yaml --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json,use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json,use_case.updatePartnersInfo.plugin_data_common=./update-partners-info.plugin.json
 ```
 
 2.2 Upgraded installation is of use case type **join-network**
 
 ```shell
-helm upgrade --install qn-0 pharmaledgerassoc/quorum-node -f ./my-values.yaml --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json,use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json,use_case.updatePartnersInfo.plugin_data_common=./update-partners-info.plugin.json
+helm upgrade --install qn-0 axiologic-pla/quorum-node -f ./my-values.yaml --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json,use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json,use_case.updatePartnersInfo.plugin_data_common=./update-partners-info.plugin.json
 ```
 
 The execution of the chart will update all the peers and propose all the peers as validators.

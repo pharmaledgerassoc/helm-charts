@@ -38,7 +38,7 @@
   - Uses Helm hooks for Init and Cleanup
   - Optimized Build process: SeedsBackup will only be created if the underlying Container image has changed, e.g. in case of an upgrade!
   - Readiness probe implemented. Application container is considered as *ready* after build process has been finished.
-  - Value `config.ethadapterUrl` has changed from `https://ethadapter.my-company.com:3000` to `http://ethadapter.ethadapter:3000` in order to reflect changes in [ethadapter](https://github.com/pharmaledgerassoc/helmchart-ethadapter/tree/epi-improve-build/charts/ethadapter).
+  - Value `config.ethadapterUrl` has changed from `https://ethadapter.my-company.com:3000` to `http://ethadapter.ethadapter:3000` in order to reflect changes in [ethadapter](https://github.com/axiologic-pla/helmchart-ethadapter/tree/epi-improve-build/charts/ethadapter).
   - Value `persistence.storageClassName` has changed from `gp2` to empty string `""` in order to remove pre-defined setting for AWS and to be cloud-agnostic by default.
   - Configurable sleep time between start of apihub and build process (`config.sleepTime`).
   - Configuration options for PersistentVolumeClaim
@@ -158,7 +158,7 @@ It is recommended to put non-sensitive configuration values in an configuration 
 2. Install via helm to namespace `default`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version={{ template "chart.version" . }} \
+    helm upgrade my-release-name axiologic-pla/epi --version={{ template "chart.version" . }} \
         --install \
         --values my-config.yaml \
     ```
@@ -263,7 +263,7 @@ More information can be found here:
 
 Sample for AWS:
 
-1. Prepare `env.json` and `apihub.json` files. See [here](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json) and [here](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/env.json) for templates.
+1. Prepare `env.json` and `apihub.json` files. See [here](https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json) and [here](https://github.com/axiologic-pla/epi-workspace/blob/v1.3.1/env.json) for templates.
 2. Create a new Secret in Secrets Manager with two keys `envJson` and `apihubJson`. Note: If you want to create the secret as PlainText, then you must encode the values to JSON String each!
 
     Sample:
@@ -366,7 +366,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version={{ template "chart.version" . }} \
+    helm upgrade my-release-name axiologic-pla/epi --version={{ template "chart.version" . }} \
         --install \
         --namespace=my-namespace \
         --values my-config.yaml \
@@ -377,7 +377,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version={{ template "chart.version" . }} \
+    helm upgrade my-release-name axiologic-pla/epi --version={{ template "chart.version" . }} \
         --install \
         --wait --timeout=600s \
         --values my-config.yaml \
