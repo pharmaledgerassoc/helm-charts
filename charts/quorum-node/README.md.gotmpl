@@ -45,7 +45,7 @@ These four installation samples demonstrate
 
 ### Option 1: Join Network followed by updating the PartnerInfo
 
-The **most common option** is to [join an existing network](../../usecases/join-network/readme.md) and to [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - which proposes PartnerNodes to Validators.
+The **most common option** is to [join an existing network](../../usecases/join-network/readme.md) and to [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - with possibility  to propose PartnerNodes to Validators.
 
 Also see **[Full Sample](./docs/full_sample/README.md)**.
 
@@ -59,6 +59,8 @@ use_case:
 use_case:
   updatePartnersInfo:
     enabled: true
+  promoteValidators:
+    enabled: true       
 ```
 
 ```shell
@@ -96,7 +98,7 @@ helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version={{ 
 
 ### Option 3: New Network followed by updating the PartnerInfo
 
-Create a [New network](../../usecases/new-network/readme.md) and [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - which proposes PartnerNodes to Validators.
+Create a [New network](../../usecases/new-network/readme.md) and [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - with possibility  to propose PartnerNodes to Validators.
 
 ```yaml
 use_case:
@@ -108,6 +110,8 @@ use_case:
 use_case:
   updatePartnersInfo:
     enabled: true
+  promoteValidators:
+    enabled: true        
 ```
 
 ```shell

@@ -139,6 +139,11 @@ use_case:
         ]
       }
 
+  promoteValidators:
+  # -- Enable post update job for promoting all peers listed in updatePartnersInfo to be promoted to validators
+  # Default false
+    enabled: false
+
 # Persistence using Persistent Volume Claims
 # See [http://kubernetes.io/docs/user-guide/persistent-volumes/](http://kubernetes.io/docs/user-guide/persistent-volumes/)
 persistence:
