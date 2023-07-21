@@ -4,7 +4,7 @@
 
 image:
   # -- The repository of the Quorum container image
-  repository: 061089524335.dkr.ecr.eu-west-1.amazonaws.com/quorum
+  repository: quorumengineering/quorum
   # -- Image Pull Policy
   pullPolicy: Always
   # -- Image tag
@@ -12,7 +12,7 @@ image:
   # -- sha256 digest of the image.
   # Do not add the prefix "@sha256:".
   # <!-- # pragma: allowlist secret -->
-  sha: "30a4c942da7bbc94a1c1b59caa28859fc8c75470399175f5b664522ea1b3d7ee"  # pragma: allowlist secret
+  sha: "bab0a966b3dedeb102b402ba86c1fc02050416f2ce6d153356342fcc9424456e"  # pragma: allowlist secret
 
 ## -- The strategy of the deployment. Defaults to Recreate as a PVC is bound to it.
 ## See `kubectl explain deployment.spec.strategy` for more and [https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)
