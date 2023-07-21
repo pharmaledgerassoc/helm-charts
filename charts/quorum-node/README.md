@@ -1,6 +1,6 @@
 # quorum-node
 
-![Version: 0.6.7](https://img.shields.io/badge/Version-0.6.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0](https://img.shields.io/badge/AppVersion-23.4.0-informational?style=flat-square)
+![Version: 0.6.8](https://img.shields.io/badge/Version-0.6.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0](https://img.shields.io/badge/AppVersion-23.4.0-informational?style=flat-square)
 
 A Helm chart for the deployment of the quorum node on Kubernetes supporting new-network, join-network and update-partners-info use cases.
 
@@ -64,7 +64,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.7 \
+helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.8 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json \
@@ -89,7 +89,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.7 \
+helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.8 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
@@ -115,7 +115,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.7 \
+helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.8 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json \
@@ -140,7 +140,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.7 \
+helm upgrade --install quorum-node-0 axiologic-pla/quorum-node --version=0.6.8 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json
@@ -165,7 +165,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name axiologic-pla/quorum-node --version=0.6.7 \
+    helm upgrade my-release-name axiologic-pla/quorum-node --version=0.6.8 \
       --install \
       --namespace=my-namespace \
       --values my-values.yaml \
@@ -176,7 +176,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name axiologic-pla/quorum-node --version=0.6.7 \
+    helm upgrade my-release-name axiologic-pla/quorum-node --version=0.6.8 \
       --install \
       --wait --timeout=600s \
       --values my-values.yaml \
@@ -203,8 +203,8 @@ helm delete quorum-node-0 \
 | extraResources | string | `nil` | An array of extra resources that will be deployed. This is useful e.g. for custom resources like SnapshotSchedule provided by [https://github.com/backube/snapscheduler](https://github.com/backube/snapscheduler). |
 | fullnameOverride | string | `""` | Override the full name |
 | image.pullPolicy | string | `"Always"` | Image Pull Policy |
-| image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/quorum"` | The repository of the Quorum container image |
-| image.sha | string | `"30a4c942da7bbc94a1c1b59caa28859fc8c75470399175f5b664522ea1b3d7ee"` | sha256 digest of the image. Do not add the prefix "@sha256:". <!-- # pragma: allowlist secret --> |
+| image.repository | string | `"quorumengineering/quorum"` | The repository of the Quorum container image |
+| image.sha | string | `"bab0a966b3dedeb102b402ba86c1fc02050416f2ce6d153356342fcc9424456e"` | sha256 digest of the image. Do not add the prefix "@sha256:". <!-- # pragma: allowlist secret --> |
 | image.tag | string | `"23.4.0"` | Image tag |
 | imagePullSecrets | list | `[]` | Secret(s) for pulling an container image from a private registry. See [https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
 | kubectl.image.pullPolicy | string | `"Always"` | Image Pull Policy |
