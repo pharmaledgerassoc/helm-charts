@@ -78,7 +78,7 @@ data:
     # outside the container
     # kubectl exec -it $POD -c quorum -- /geth-helpers/geth-attach.sh
     echo "connecting to geth {{ .Values.quorum.homeMountPath }}"
-    geth attach --datadir {{ .Values.quorum.dataDirPath }} {{ .Values.quorum.dataDirPath }}/geth.ipc
+    geth attach --datadir {{ .Values.quorum.dataDirPath }} {{ .Values.quorum.dataDirPath }}/geth.ipc --allow-insecure-unlock --vmdebug
   geth-exec.sh: |-
     #!/bin/sh
 
