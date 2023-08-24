@@ -136,7 +136,6 @@ spec:
                 --permissioned \
                 --nat=none \
                 --verbosity {{ .Values.quorum.log.verbosity }} \
-                --allow-insecure-unlock \
                 --vmdebug
             {{- if .Values.quorum.log.emitcheckpoints }}
                 --emitcheckpoints \
