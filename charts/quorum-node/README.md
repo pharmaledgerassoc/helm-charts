@@ -1,6 +1,6 @@
 # quorum-node
 
-![Version: 0.6.6](https://img.shields.io/badge/Version-0.6.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0](https://img.shields.io/badge/AppVersion-23.4.0-informational?style=flat-square)
+![Version: 0.6.7](https://img.shields.io/badge/Version-0.6.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0](https://img.shields.io/badge/AppVersion-23.4.0-informational?style=flat-square)
 
 A Helm chart for the deployment of the quorum node on Kubernetes supporting new-network, join-network and update-partners-info use cases.
 
@@ -62,7 +62,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json \
@@ -87,7 +87,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
@@ -111,7 +111,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json \
@@ -136,7 +136,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json
@@ -161,7 +161,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.6 \
+    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.7 \
       --install \
       --namespace=my-namespace \
       --values my-values.yaml \
@@ -172,7 +172,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.6 \
+    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.7 \
       --install \
       --wait --timeout=600s \
       --values my-values.yaml \
@@ -219,7 +219,7 @@ helm delete quorum-node-0 \
 | persistence.data.existingClaim | string | `""` | The name of an existing PVC to use instead of creating a new one. |
 | persistence.data.finalizers | list | `["kubernetes.io/pvc-protection"]` | Finalizers for data PVC. See [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#storage-object-in-use-protection](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#storage-object-in-use-protection) |
 | persistence.data.selectorLabels | object | `{}` | Selector Labels for the data PVC. See [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector) |
-| persistence.data.size | string | `"3Gi"` | Size of the data PVC volume. |
+| persistence.data.size | string | `"24Gi"` | Size of the data PVC volume. |
 | persistence.data.storageClassName | string | `""` | Name of the storage class for data PVC. If empty or not set then storage class will not be set - which means that the default storage class will be used. |
 | persistence.data.volumeSnapshots.apiVersion | string | `"v1"` | API Version of the "snapshot.storage.k8s.io" resource. See [https://kubernetes.io/docs/concepts/storage/volume-snapshots/](https://kubernetes.io/docs/concepts/storage/volume-snapshots/) |
 | persistence.data.volumeSnapshots.className | string | `""` | The Volume Snapshot class name. See [https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/](https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/) |
@@ -233,7 +233,7 @@ helm delete quorum-node-0 \
 | persistence.logs.existingClaim | string | `""` | The name of an existing PVC to use instead of creating a new one. |
 | persistence.logs.finalizers | list | `["kubernetes.io/pvc-protection"]` | Finalizers for logs PVC. See [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#storage-object-in-use-protection](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#storage-object-in-use-protection) |
 | persistence.logs.selectorLabels | object | `{}` | Selector Labels for the logs PVC. See [https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector) |
-| persistence.logs.size | string | `"1Gi"` | Size of the logs PVC volume. |
+| persistence.logs.size | string | `"8Gi"` | Size of the logs PVC volume. |
 | persistence.logs.storageClassName | string | `""` | Name of the storage class for logs PVC. If empty or not set then storage class will not be set - which means that the default storage class will be used. |
 | persistence.logs.volumeSnapshots.apiVersion | string | `"v1"` | API Version of the "snapshot.storage.k8s.io" resource. See [https://kubernetes.io/docs/concepts/storage/volume-snapshots/](https://kubernetes.io/docs/concepts/storage/volume-snapshots/) |
 | persistence.logs.volumeSnapshots.className | string | `""` | The Volume Snapshot class name. See [https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/](https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/) |
