@@ -150,7 +150,7 @@ persistence:
     # If empty or not set then storage class will not be set - which means that the default storage class will be used.
     storageClassName: ""
     # -- Size of the data PVC volume.
-    size: "3Gi"
+    size: "24Gi"
     # -- Annotations for the data PVC.
     annotations: {}
     # -- Finalizers for data PVC.
@@ -206,7 +206,7 @@ persistence:
     # If empty or not set then storage class will not be set - which means that the default storage class will be used.
     storageClassName: ""
     # -- Size of the logs PVC volume.
-    size: "1Gi"
+    size: "8Gi"
     # -- Annotations for the logs PVC.
     annotations: {}
     # -- Finalizers for logs PVC.
