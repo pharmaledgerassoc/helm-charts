@@ -62,7 +62,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json \
@@ -87,7 +87,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
@@ -111,7 +111,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json \
@@ -136,7 +136,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.6 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json
@@ -161,7 +161,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.6 \
+    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.7 \
       --install \
       --namespace=my-namespace \
       --values my-values.yaml \
@@ -172,7 +172,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.6 \
+    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.7 \
       --install \
       --wait --timeout=600s \
       --values my-values.yaml \
