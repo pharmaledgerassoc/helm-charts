@@ -17,7 +17,7 @@ config:
   # -- Secret Pass Phrase for de/encrypting private keys for application wallets created by builder.
   buildSecretKey: ""
   # -- The epi version
-  epiVersion: "2023.1.0"
+  epiVersion: "2023.2.0"
   overrides:
     # -- Option to explicitly override the environment.js file used for demiurge-wallet instead of using the predefined template.
     # Note: Usually not required
@@ -67,10 +67,6 @@ config:
     # 4. Add these values to "skipOAuth": "/leaflet-wallet/", "/directory-summary/", "/iframe/"
     apihubJson: ""
 
-    # -- Centrally managed and provided BDNS Hosts Config.
-    # You must set this value in a non-sandbox environment!
-    # See [templates/_configmap-bdns.tpl](templates/_configmap-bdns.tpl) for default value.
-    bdnsHosts: ""
 
 # Runner settings
 runner:
