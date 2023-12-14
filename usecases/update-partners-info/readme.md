@@ -46,6 +46,24 @@ use_case:
       ]
 ```
 
+#### Decide whether promote all peers to validators
+
+In case that you want to immediate promote all added peers to validators - will only work with conjunction with enabled updatePartnersInfo.
+Example :
+```yaml
+use_case:
+   updatePartnersInfo:
+      enabled: true
+      peers: [
+            company-1,
+            company-2,
+            company-3
+      ]
+   promoteValidators:
+      enabled: true   
+```
+
+
 ### Configure shared repository
 Example
 ```yaml
@@ -82,7 +100,7 @@ helm upgrade --install qn-0 pharmaledgerassoc/quorum-node -f ./my-values.yaml --
 helm upgrade --install qn-0 pharmaledgerassoc/quorum-node -f ./my-values.yaml --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json,use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json,use_case.updatePartnersInfo.plugin_data_common=./update-partners-info.plugin.json
 ```
 
-The execution of the chart will update all the peers and propose all the peers as validators.
+The execution of the chart will update all the peers and if promoteValidators is enabled it will also propose all the peers as validators.
 
 #### Step 5: Backup your installation and private information
 
