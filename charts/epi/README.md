@@ -1,6 +1,6 @@
 # epi
 
-![Version: 0.6.5](https://img.shields.io/badge/Version-0.6.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2023.1.0](https://img.shields.io/badge/AppVersion-2023.1.0-informational?style=flat-square)
+![Version: 0.6.6](https://img.shields.io/badge/Version-0.6.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.0](https://img.shields.io/badge/AppVersion-3.0.0-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger epi (electronic product information) application
 
@@ -158,7 +158,7 @@ It is recommended to put non-sensitive configuration values in an configuration 
 2. Install via helm to namespace `default`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.5 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.6 \
         --install \
         --values my-config.yaml \
     ```
@@ -366,7 +366,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.5 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.6 \
         --install \
         --namespace=my-namespace \
         --values my-config.yaml \
@@ -377,7 +377,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.5 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.6.6 \
         --install \
         --wait --timeout=600s \
         --values my-config.yaml \
@@ -401,12 +401,6 @@ Run `helm upgrade --helm` for full list of options.
 [helm-unittest](https://github.com/quintush/helm-unittest) is being used for testing the output of the helm chart.
 Tests can be found in [tests](./tests)
 
-## Maintainers
-
-| Name | Email | Url |
-| ---- | ------ | --- |
-| skutner |  | <https://github.com/skutner> |
-
 ## Values
 
 *Note:* Please scroll horizontally to show more columns (e.g. description)!
@@ -425,9 +419,12 @@ Tests can be found in [tests](./tests)
 | builder.ttlSecondsAfterFinished | int | `600` | Time to keep the Job after finished. If value is not set, then 'ttlSecondsAfterFinished' will not be set. |
 | config.buildSecretKey | string | `""` | Secret Pass Phrase for de/encrypting private keys for application wallets created by builder. |
 | config.companyName | string | `"Company Inc"` | A CompanyName which is displayed on the web page. |
+| config.dev | string | `"true"` | Enable Dev mode |
 | config.domain | string | `"epipoc"` | The Domain, e.g. "epipoc" |
-| config.epiVersion | string | `"2023.1.0"` | The epi version |
+| config.enclaveType | string | `"VersionlessDSUEnclave"` | DSU fabric enclave type |
+| config.epiVersion | string | `"3.0.0"` | The epi version |
 | config.ethadapterUrl | string | `"http://ethadapter.ethadapter:3000"` | The Full URL of the Ethadapter including protocol and port, e.g. "https://ethadapter.my-company.com:3000" |
+| config.fabricEnabled | string | `"false"` | Enable standalone dsu-fabric (for version >= 3.0.0) |
 | config.overrides.apihubJson | string | `""` | Option to explitly set the apihub.json instead of using the default from [https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json). Note: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault. <br/> Settings: [https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3](https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3) <br/> For SSO (not enabled by default): <br/> 1. "enableOAuth": true <br/> 2. "serverAuthentication": true <br/> 3. For SSO via OAuth with Azure AD, replace <TODO_*> with appropriate values.    For other identity providers (IdP) (e.g. Google, Ping, 0Auth), refer to documentation.    "redirectPath" must match the redirect URL configured at IdP <br/> 4. Add these values to "skipOAuth": "/leaflet-wallet/", "/directory-summary/", "/iframe/" |
 | config.overrides.bdnsHosts | string | `""` | Centrally managed and provided BDNS Hosts Config. You must set this value in a non-sandbox environment! See [templates/_configmap-bdns.tpl](templates/_configmap-bdns.tpl) for default value. |
 | config.overrides.demiurgeEnvironmentJs | string | `""` | Option to explicitly override the environment.js file used for demiurge-wallet instead of using the predefined template. Note: Usually not required |
@@ -439,6 +436,7 @@ Tests can be found in [tests](./tests)
 | config.overrides.lpwaEnvironmentJs | string | `""` | Option to explicitly override the environment.js file used for Lightweight PWA instead of using the predefined template. Note: Usually not required |
 | config.overrides.subDomainConfigJson | string | `""` | Option to explicitly override the config.json used for the subDomain instead of using the predefined template. Note: Usually not required |
 | config.overrides.vaultDomainConfigJson | string | `""` | Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template. Note: Usually not required |
+| config.ssoSecretsEncryptionKey | string | `""` | Base64 encoded 32 bytes string |
 | config.subDomain | string | `"epipoc.my-company"` | The Subdomain, should be domain.company, e.g. epipoc.my-company |
 | config.vaultDomain | string | `"vault.my-company"` | The Vault domain, should be vault.company, e.g. vault.my-company |
 | extraResources | string | `nil` | An array of extra resources that will be deployed. This is useful e.g. for custom resources like SnapshotSchedule provided by [https://github.com/backube/snapscheduler](https://github.com/backube/snapscheduler). |
@@ -502,5 +500,3 @@ Tests can be found in [tests](./tests)
 | volumeSnapshots.preUpgradeEnabled | bool | `false` | Whether to create snapshots before helm upgrading or not. The name of the VolumeSnapshot will be "<helm release name>-upgrade-to-revision-<helm revision>-<UTC timestamp YYYYMMDDHHMM>", e.g. "epi-upgrade-to-revision-19-202206221211" |
 | volumeSnapshots.waitForReadyToUse | bool | `true` | Whether to wait until the VolumeSnapshot is ready to use. Note: On first snapshot this may take a while. |
 
-----------------------------------------------
-Autogenerated from chart metadata using [helm-docs v1.8.1](https://github.com/norwoodj/helm-docs/releases/v1.8.1)

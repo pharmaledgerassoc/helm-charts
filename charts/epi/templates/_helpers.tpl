@@ -143,9 +143,10 @@ Configuration env.json
 {
   "PSK_TMP_WORKING_DIR": "tmp",
   "PSK_CONFIG_LOCATION": "../apihub-root/external-volume/config",
-  "DEV": false,
+  "DEV": {{ required "config.dev must be set" .Values.config.dev | quote}},
   "VAULT_DOMAIN": {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote}},
   "BUILD_SECRET_KEY": {{ required "config.buildSecretKey must be set" .Values.config.buildSecretKey | quote}},
+  "SSO_SECRETS_ENCRYPTION_KEY": {{ required "config.ssoSecretsEncryptionKey must be set" .Values.config.ssoSecretsEncryptionKey | quote}},
   "BDNS_ROOT_HOSTS": "http://127.0.0.1:8080",
   "OPENDSU_ENABLE_DEBUG": true
 }

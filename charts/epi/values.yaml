@@ -10,14 +10,22 @@ config:
   subDomain: "epipoc.my-company"
   # -- The Vault domain, should be vault.company, e.g. vault.my-company
   vaultDomain: "vault.my-company"
+  # -- DSU fabric enclave type
+  enclaveType: "VersionlessDSUEnclave"
   # -- The Full URL of the Ethadapter including protocol and port, e.g. "https://ethadapter.my-company.com:3000"
   ethadapterUrl: "http://ethadapter.ethadapter:3000"
   # -- A CompanyName which is displayed on the web page.
   companyName: "Company Inc"
   # -- Secret Pass Phrase for de/encrypting private keys for application wallets created by builder.
   buildSecretKey: ""
+  # -- Base64 encoded 32 bytes string
+  ssoSecretsEncryptionKey: ""
+  # -- Enable Dev mode
+  dev: "true"
+  # -- Enable standalone dsu-fabric (for version >= 3.0.0)
+  fabricEnabled: "false"
   # -- The epi version
-  epiVersion: "2023.1.0"
+  epiVersion: "3.0.0"
   overrides:
     # -- Option to explicitly override the environment.js file used for demiurge-wallet instead of using the predefined template.
     # Note: Usually not required
