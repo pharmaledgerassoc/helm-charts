@@ -63,6 +63,14 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+Selector labels for leaflet reader
+*/}}
+{{- define "epi.leafletReaderSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "epi.name" . }}LeafletReader
+app.kubernetes.io/instance: {{ .Release.Name }}LeafletReader
+{{- end }}
+
+{{/*
 Selector labels for runner used by kubectl --selector=key1=value1,key2=value2
 */}}
 {{- define "epi.selectorLabelsKubectl" -}}
@@ -145,8 +153,6 @@ Configuration env.json
   "PSK_CONFIG_LOCATION": "../apihub-root/external-volume/config",
   "DEV": {{ required "config.dev must be set" .Values.config.dev | quote}},
   "VAULT_DOMAIN": {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote}},
-  "EPI_DOMAIN": {{ required "config.domain must be set" .Values.config.domain | quote}},
-  "EPI_SUBDOMAIN": {{ required "config.subDomain must be set" .Values.config.subDomain | quote}},
   "BUILD_SECRET_KEY": {{ required "config.buildSecretKey must be set" .Values.config.buildSecretKey | quote}},
   "SSO_SECRETS_ENCRYPTION_KEY": {{ required "config.ssoSecretsEncryptionKey must be set" .Values.config.ssoSecretsEncryptionKey | quote}},
   "BDNS_ROOT_HOSTS": "http://127.0.0.1:8080",
@@ -208,6 +214,83 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
     },
     "gtin-dsu-wizard": {
       "module": "./../../gtin-dsu-wizard"
+    },
+    "staticServer": {
+      "excludedFiles": [
+        ".*.secret"
+      ]
+    },
+    "bricking": {},
+    "anchoring": {}
+  },
+  "responseHeaders": {
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-XSS-Protection": "1; mode=block"
+  },
+  "enableRequestLogger": true,
+  "enableJWTAuthorisation": false,
+  "enableOAuth": false,
+  "oauthJWKSEndpoint": "https://login.microsoftonline.com/<TODO_TENANT_ID>/discovery/v2.0/keys",
+  "enableLocalhostAuthorization": false,
+  "skipOAuth": [
+    "/assets",
+    "/bdns",
+    "/bundles",
+    "/getAuthorization",
+    "/external-volume/config/oauthConfig.js",
+    "/leaflet-wallet/",
+    "/external-volume/wallets/leaflet-wallet/",
+    "/cloud-wallet/",
+    "/directory-summary/",
+    "/iframe/"
+  ],
+  "oauthConfig": {
+    "issuer": {
+      "issuer": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/v2.0/",
+      "authorizationEndpoint": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/v2.0/authorize",
+      "tokenEndpoint": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/v2.0/token"
+    },
+    "client": {
+      "clientId": "<TODO_CLIENT_ID>",
+      "scope": "email offline_access openid api://<TODO_CLIENT_ID>/access_as_user",
+      "redirectPath": "https://<TODO_DNS_NAME>/?root=true",
+      "clientSecret": "<TODO_CLIENT_SECRET>",
+      "logoutUrl": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/logout",
+      "postLogoutRedirectUrl": "https://<TODO_DNS_NAME>/?logout=true"
+    },
+    "sessionTimeout": 1800000,
+    "keyTTL": 3600000,
+    "debugLogEnabled": false
+  },
+  "serverAuthentication": false
+}
+{{- end }}
+
+{{/*
+Configuration apihub.json for read only mode
+*/}}
+{{- define "epi.readOnlyApihubJson" -}}
+{
+  "storage": "../apihub-root",
+  "port": 8080,
+  "preventRateLimit": true,
+  "activeComponents": [
+    "bdns",
+    "bricking",
+    "anchoring",
+    "leaflet-web-api",
+    "get-gtin-owner",
+    "debugLogger",
+    "staticServer"
+  ],
+  "componentsConfig": {
+    "leaflet-web-api": {
+      "module": "./../../gtin-resolver",
+      "function": "getWebLeaflet"
+    },
+    "get-gtin-owner": {
+      "module": "./../../gtin-resolver",
+      "function": "getGTINOwner"
     },
     "staticServer": {
       "excludedFiles": [

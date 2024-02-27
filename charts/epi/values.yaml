@@ -97,9 +97,6 @@ runner:
     # <!-- # pragma: allowlist secret -->
     sha: "407dad9208fd36aca61c76cca7bdca6ba4ce97552e783064c4d8e98be1ceb36c"  # pragma: allowlist secret
 
-  # -- The number of replicas for the runner
-  replicaCount: 1
-
   # -- Annotations added to the runner pod
   podAnnotations: {}
 
@@ -219,6 +216,58 @@ builder:
     runAsUser: 1000
     runAsGroup: 1000
     allowPrivilegeEscalation: false
+
+leafletReader:
+  # -- enabling the leaflet-reader installation (apihub in READ MODE, using the data from the same pvc as the normal epi-runner)
+  enabled: true
+  # the number of leaflet-reader deployment replicas
+  replicaCount: 1
+  # Ingress settings for the leaflet-reader
+  ingress:
+    # -- Whether to create ingress or not for the runner.
+    # <br/>
+    # Note: For ingress an Ingress Controller (e.g. AWS LB Controller, NGINX Ingress Controller, Traefik, ...) is required and service.type should be ClusterIP or NodePort depending on your configuration
+    enabled: false
+    # -- The className specifies the IngressClass object which is responsible for that class.
+    # See [https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class)
+    # <br/>
+    # For Kubernetes >= 1.18 it is required to have an existing IngressClass object.
+    # If IngressClass object does not exists, omit className and add the deprecated annotation 'kubernetes.io/ingress.class' instead.
+    # <br/>
+    # For Kubernetes < 1.18 either use className or annotation 'kubernetes.io/ingress.class'.
+    className: ""
+    # -- Ingress annotations.
+    # <br/>
+    # For AWS LB Controller, see [https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/ingress/annotations/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/ingress/annotations/)
+    # <br/>
+    # For Azure Application Gateway Ingress Controller, see [https://azure.github.io/application-gateway-kubernetes-ingress/annotations/](https://azure.github.io/application-gateway-kubernetes-ingress/annotations/)
+    # <br/>
+    # For NGINX Ingress Controller, see [https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/)
+    # <br/>
+    # For Traefik Ingress Controller, see [https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/#annotations](https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/#annotations)
+    annotations: { }
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+    # -- A list of hostnames and path(s) to listen at the Ingress Controller
+    hosts:
+      - # -- The FQDN/hostname
+        host: leaflet-reader.some-pharma-company.com
+        paths:
+          - # -- The Ingress Path. See [https://kubernetes.io/docs/concepts/services-networking/ingress/#examples](https://kubernetes.io/docs/concepts/services-networking/ingress/#examples)
+            # <br/>
+            # Note: For Ingress Controllers like AWS LB Controller see their specific documentation.
+            path: /
+            # -- The type of path. This value is required since Kubernetes 1.18.
+            # <br/>
+            # For Ingress Controllers like AWS LB Controller or Traefik it is usually required to set its value to ImplementationSpecific
+            # See [https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types)
+            # and [https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/](https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/)
+            pathType: ImplementationSpecific
+    tls: [ ]
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
 
 # Settings for Containers with kubectl installed used by Jobs "pre-builder", "pre-upgrade-volumesnapshot", "final-volumesnapshot" and "cleanup"
 kubectl:
