@@ -64,6 +64,13 @@ metadata:
     {{- include "epi.labels" . | nindent 4 }}
 type: Opaque
 data:
+# See https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.0/env.json
+  env.json: |-
+{{- if .Values.config.overrides.envJson }}
+{{ .Values.config.overrides.leafletReaderEnvJson | b64enc | indent 4 }}
+{{- else }}
+{{ include "leafletReader.envJson" . | b64enc | indent 4 }}
+{{- end }}
   apihub.json: |-
 {{- if .Values.config.overrides.apihubJson }}
 {{ .Values.config.overrides.readOnlyApihubJson | b64enc | indent 4 }}
