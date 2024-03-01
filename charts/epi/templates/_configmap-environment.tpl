@@ -84,7 +84,7 @@ data:
       "didDomain":  {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote}},
       "epiDomain":  {{ required "config.domain must be set" .Values.config.domain | quote}},
       "epiSubdomain":  {{ required "config.subDomain must be set" .Values.config.subDomain | quote}},
-      "enclaveType": "WalletDBEnclave",
+      "enclaveType": {{ required "config.subDomain must be set" .Values.config.enclaveType | quote}},
       "sw": false,
       "pwa": false,
       "allowPinLogin": false,

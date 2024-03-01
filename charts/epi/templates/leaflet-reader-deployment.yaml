@@ -1,17 +1,18 @@
+{{- if .Values.leafletReader.enabled -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "epi.fullname" . }}
+  name: epi-leaflet-reader
   namespace: {{ template "epi.namespace" . }}
   labels:
-    {{- include "epi.labels" . | nindent 4 }}
+    {{- include "epi.leafletReaderSelectorLabels" . | nindent 4 }}
   annotations:
     checkov.io/skip1: "CKV_K8S_40=Container is using uid 1000 (predefined user node) by default"
 spec:
-  replicas: 1
+  replicas: {{ .Values.leafletReader.replicaCount }}
   selector:
     matchLabels:
-      {{- include "epi.selectorLabels" . | nindent 6 }}
+      {{- include "epi.leafletReaderSelectorLabels" . | nindent 6 }}
 {{- with .Values.runner.deploymentStrategy }}
   strategy:
 {{ toYaml . | trim | indent 4 }}
@@ -22,11 +23,8 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmaps.yaml") . | sha256sum }}
         checksum/secret: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
-      {{- with .Values.runner.podAnnotations }}
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        {{- include "epi.selectorLabels" . | nindent 8 }}
+        {{- include "epi.leafletReaderSelectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -42,6 +40,9 @@ spec:
       containers:
       - name: main
         {{- with .Values.runner.securityContext }}
+        env:
+          - name: READ_ONLY_MODE
+            value: "true"
         securityContext:
           {{- toYaml . | nindent 10 }}
         {{- end }}
@@ -68,12 +69,13 @@ spec:
           - -c
         args:
           - |
-            echo "=======> Starting server only - do not run build as apps are already built here..."
+            echo "=======> Starting server in read only mode <======="
             npm run server
         volumeMounts:
           - name: epi-external-volume
             mountPath: /ePI-workspace/apihub-root/external-volume
-          - name: epi-secret-volume
+            readOnly: true
+          - name: leaflet-reader-secret-volume
             mountPath: /ePI-workspace/apihub-root/external-volume/config/apihub.json
             subPath: apihub.json
             readOnly: true
@@ -81,7 +83,7 @@ spec:
             mountPath: /ePI-workspace/apihub-root/external-volume/config/bdns.hosts
             subPath: bdns.hosts
             readOnly: true
-          - name: epi-secret-volume
+          - name: leaflet-reader-secret-volume
             mountPath: /ePI-workspace/env.json
             subPath: env.json
             readOnly: true
@@ -99,59 +101,6 @@ spec:
             mountPath: /ePI-workspace/apihub-root/external-volume/config/domains/{{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json
             subPath: {{ required "config.vaultDomain must be set" .Values.config.vaultDomain }}.json
             readOnly: true
-            #
-            # Mounts for environment configs to trust-loader
-            #
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/trust-loader-config/demiurge-wallet/loader/environment.js
-            subPath: demiurge-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/trust-loader-config/dsu-explorer/loader/environment.js
-            subPath: dsu-explorer-environment.js
-            readOnly: true
-            {{- if eq .Values.config.fabricEnabled "true" }}
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/dsu-fabric/environment.js
-            subPath: dsu-fabric-environment.js
-            readOnly: true
-            {{- end }}
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/trust-loader-config/dsu-fabric-wallet/loader/environment.js
-            subPath: dsu-fabric-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/dsu-fabric/environment.js
-            subPath: dsu-fabric-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/trust-loader-config/leaflet-wallet/loader/environment.js
-            subPath: leaflet-environment.js
-            readOnly: true
-            #
-            # Mounts for environment configs to wallets itself
-            #
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/demiurge-wallet/loader/environment.js
-            subPath: demiurge-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/dsu-explorer/loader/environment.js
-            subPath: dsu-explorer-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/dsu-fabric-wallet/loader/environment.js
-            subPath: dsu-fabric-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/leaflet-wallet/loader/environment.js
-            subPath: leaflet-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/lightweight-pwa/environment.js
-            subPath: lpwa-environment.js
-            readOnly: true
-
       volumes:
         - name: epi-secret-volume
         {{- if .Values.secretProviderClass.enabled }}
@@ -160,6 +109,18 @@ spec:
             readOnly: true
             volumeAttributes:
               secretProviderClass: {{ include "epi.fullname" . }}
+        {{- else }}
+          secret:
+            secretName: {{ include "epi.fullname" . }}
+            defaultMode: 0400
+        {{- end }}
+        - name: leaflet-reader-secret-volume
+        {{- if .Values.secretProviderClass.enabled }}
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: leaflet-reader-secret
         {{- else }}
           secret:
             secretName: {{ include "epi.fullname" . }}
@@ -189,3 +150,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+{{- end }}
