@@ -170,7 +170,7 @@ runner:
 builder:
   # -- Boolean flag whether to enforce running the Builder even if it is not required.
   # Useful for testing purpose.
-  forceRun: false
+  forceRun: true
   # -- The time to sleep between start of apihub (npm run server) and build process (npm run build-all)
   sleepTime: "10s"
   # -- Time to keep the Job after finished.
