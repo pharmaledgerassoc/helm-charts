@@ -159,6 +159,7 @@ Configuration env.json
   "OPENDSU_ENABLE_DEBUG": true,
   "EPI_DOMAIN": {{ required "config.domain must be set" .Values.config.domain | quote}},
   "EPI_SUBDOMAIN": {{ required "config.subDomain must be set" .Values.config.subDomain | quote}},
+  "EPI_VERSION": {{ required "config.epiVersion must be set" .Values.config.epiVersion | quote}},
   "MIGRATION_FOLDER_PATH": "../../../../apihub-root/migrations"
 }
 {{- end }}
