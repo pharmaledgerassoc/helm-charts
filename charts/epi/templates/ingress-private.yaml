@@ -1,9 +1,9 @@
-{{- if .Values.ingress.enabled -}}
+{{- if .Values.ingressPrivate.enabled -}}
 {{- $fullName := include "epi.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
+{{- if and .Values.ingressPrivate.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
+  {{- if not (hasKey .Values.ingressPrivate.annotations "kubernetes.io/ingress.class") }}
+  {{- $_ := set .Values.ingressPrivate.annotations "kubernetes.io/ingress.class" .Values.ingressPrivate.className}}
   {{- end }}
 {{- end }}
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -19,17 +19,17 @@ metadata:
   namespace: {{ template "epi.namespace" . }}
   labels:
     {{- include "epi.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
+  {{- with .Values.ingressPrivate.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
-  ingressClassName: {{ .Values.ingress.className }}
+  {{- if and .Values.ingressPrivateclassName (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+  ingressClassName: {{ .Values.ingressPrivate.className }}
   {{- end }}
-  {{- if .Values.ingress.tls }}
+  {{- if .Values.ingressPrivate.tls }}
   tls:
-    {{- range .Values.ingress.tls }}
+    {{- range .Values.ingressPrivate.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -38,7 +38,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.hosts }}
+    {{- range .Values.ingressPrivate.hosts }}
     - host: {{ .host | quote }}
       http:
         paths:
