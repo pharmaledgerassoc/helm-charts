@@ -1,6 +1,6 @@
 # ethadapter
 
-![Version: 0.7.14](https://img.shields.io/badge/Version-0.7.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.1.0](https://img.shields.io/badge/AppVersion-1.1.0-informational?style=flat-square)
+![Version: 0.7.17](https://img.shields.io/badge/Version-0.7.17-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.0-rc1](https://img.shields.io/badge/AppVersion-3.0.0-rc1-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger Ethereum Adapter Service
 
@@ -80,7 +80,7 @@ Configuration for a connected environment. You will need at least these configur
     Either pass sensitive *Org Account JSON* (`secrets.orgAccountJson`) in JSON format as escaped string:
 
     ```bash
-    helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.14 \
+    helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.17 \
         --values my-values.yaml \
         --set-string secrets.orgAccountJson="\{ \"address\": \"0xabcdef1234567890\" \, \"privateKey\": \"0x1234567890abcdef\" \}"
 
@@ -89,7 +89,7 @@ Configuration for a connected environment. You will need at least these configur
     or pass the value in JSON format as base64 encoded string (`secrets.orgAccountJsonBase64`):
 
     ```bash
-    helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.14 \
+    helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.17 \
         --values my-values.yaml \
         --set-string secrets.orgAccountJsonBase64="eyAia2V5IjogInZhbHVlIiB9"
 
@@ -110,14 +110,14 @@ secrets:
 and install
 
 ```bash
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.14 \
+helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.17 \
     --values my-values.yaml
 ```
 
 or pass `secrets.orgAccountJson` as escaped string on the commandline:
 
 ```bash
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.14 \
+helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.17 \
   --set secrets.orgAccountJson="\{\"address\": \"0xb5ced4530d6ccbb31b2b542fd9b4558b52296784\"\, \"privateKey\": \"0x6b93a268f68239d321981125ecf24488920c6b3d900043d56fef66adb776abd5\"\}"
 ```
 
@@ -130,7 +130,7 @@ Run `helm upgrade --helm` for full list of options.
 You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
 ```bash
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.14 \
+helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.17 \
   --namespace=my-namespace \
   --values my-values.yaml
 ```
@@ -140,7 +140,7 @@ helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.14 
 Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
 ```bash
-helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.14 \
+helm upgrade --install ethadapter pharmaledgerassoc/ethadapter --version=0.7.17 \
   --wait --timeout=600s \
   --values my-values.yaml
 ```
@@ -198,7 +198,7 @@ Tests can be found in [tests](./tests)
 | image.pullPolicy | string | `"Always"` | Image Pull Policy |
 | image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/ethadapter"` | The repository of the container image <!-- # pragma: allowlist secret --> |
 | image.sha | string | `"d8470b4772cc55cd1dae71f28b83c70ed4ac3ffc9027236b3061292af7af32b2"` | sha256 digest of the image. Do not add the prefix "@sha256:" Default to image digest for version 1.0.2 <!-- # pragma: allowlist secret --> |
-| image.tag | string | `"1.1.0"` | Overrides the image tag whose default is the chart appVersion. |
+| image.tag | string | `"3.0.0-rc1"` | Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` | Secret(s) for pulling an container image from a private registry. See [https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
 | ingress.annotations | object | `{}` | Ingress annotations. For AWS LB Controller, see [https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/ingress/annotations/](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/ingress/annotations/) For Azure Application Gateway Ingress Controller, see [https://azure.github.io/application-gateway-kubernetes-ingress/annotations/](https://azure.github.io/application-gateway-kubernetes-ingress/annotations/) For NGINX Ingress Controller, see [https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/) For Traefik Ingress Controller, see [https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/#annotations](https://doc.traefik.io/traefik/routing/providers/kubernetes-ingress/#annotations) |
 | ingress.className | string | `""` | The className specifies the IngressClass object which is responsible for that class. Note for Kubernetes >= 1.18 it is required to have an existing IngressClass object. If IngressClass object does not exists, omit className and add the deprecated annotation 'kubernetes.io/ingress.class' instead. For Kubernetes < 1.18 either use className or annotation 'kubernetes.io/ingress.class'. See https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class |

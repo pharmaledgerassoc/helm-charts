@@ -8,16 +8,16 @@ replicaCount: 1
 image:
   # -- The repository of the container image
   # <!-- # pragma: allowlist secret -->
-  repository: "pharmaledger/ethadapter"  # pragma: allowlist secret
+  repository: "public.ecr.aws/s6w3n1u5/ethadapter"  # pragma: allowlist secret
   # -- Image Pull Policy
   pullPolicy: Always
   # -- Overrides the image tag whose default is the chart appVersion.
-  tag: "1.1.1"
+  tag: "3.0.0-rc1"
   # -- sha256 digest of the image.
   # Do not add the prefix "@sha256:"
   # Default to image digest for version 1.0.2
   # <!-- # pragma: allowlist secret -->
-  sha: "c7702fb494db2d547e5cd7de3b042a586ff2b09c610f834461f9a63c91a7e88c"  # pragma: allowlist secret
+  sha: "a56ef757db1691de02625189b8f19e9acb8626165d30cf4f3aaba698d0ce6dfe"  # pragma: allowlist secret
 
 # -- Secret(s) for pulling an container image from a private registry.
 # See [https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/)

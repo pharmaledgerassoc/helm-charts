@@ -85,17 +85,17 @@ runner:
   image:
     # -- The repository of the container image for the runner
     # <!-- # pragma: allowlist secret -->
-    repository: "pharmaledger/epi-runner"  # pragma: allowlist secret
+    repository: "public.ecr.aws/s6w3n1u5/epi-runner"  # pragma: allowlist secret
     # -- Image Pull Policy for the runner
     pullPolicy: Always
     # -- Overrides the image tag whose default is the chart appVersion.
     # Default to v1.3.1
-    tag: "3.0.0-rc28"  # Note to developers: If you change this version also change appVersion in Chart.yaml
+    tag: "3.0.0-rc72"  # Note to developers: If you change this version also change appVersion in Chart.yaml
     # -- sha256 digest of the image.
     # Do not add the prefix "@sha256:"
     # Default to v1.3.1
     # <!-- # pragma: allowlist secret -->
-    sha: "5ea9a0857d243700872c29866bd68662ec3e246718ba88d2b5e3fbe453864d4b"  # pragma: allowlist secret
+    sha: "9cbcd1f1b92a021ae552e0df260d1f55c4e1d78d3c9b38ba73de7f60eba7c9fd"  # pragma: allowlist secret
 
   # -- Annotations added to the runner pod
   podAnnotations: {}
@@ -179,17 +179,17 @@ builder:
   image:
     # -- The repository of the container image for the builder.
     # <!-- # pragma: allowlist secret -->
-    repository: "pharmaledger/epi-builder"  # pragma: allowlist secret
+    repository: "public.ecr.aws/s6w3n1u5/epi-builder"  # pragma: allowlist secret
     # -- Image Pull Policy for the builder.
     pullPolicy: Always
     # -- Image tag for the builder.
     # Default to v1.3.1
-    tag: "3.0.0-rc28"
+    tag: "3.0.0-rc72"
     # -- sha256 digest of the image for the builder.
     # Do not add the prefix "@sha256:"
     # Default to v1.3.1
     # <!-- # pragma: allowlist secret -->
-    sha: "7013b176c84e3e06266e12579a371139a6c22f1ca80fb82753c453fb752d981d"  # pragma: allowlist secret
+    sha: "0db603b7de1ac77838d4c4a0f3ae6809b3024ecc19938d4279b3d92598b6e362"  # pragma: allowlist secret
 
   # -- Pod Security Context for the builder.
   # See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod)
