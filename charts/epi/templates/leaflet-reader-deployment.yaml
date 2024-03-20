@@ -115,17 +115,9 @@ spec:
             defaultMode: 0400
         {{- end }}
         - name: leaflet-reader-secret-volume
-        {{- if .Values.secretProviderClass.enabled }}
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: leaflet-reader-secret
-        {{- else }}
           secret:
-            secretName: {{ include "epi.fullname" . }}
+            secretName: leaflet-reader-secret
             defaultMode: 0400
-        {{- end }}
         - name: epi-bdns-config-volume
           configMap:
             name: {{ include "epi.fullname" . }}-bdns

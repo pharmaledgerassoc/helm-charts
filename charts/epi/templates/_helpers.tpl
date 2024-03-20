@@ -326,39 +326,7 @@ Configuration apihub.json for read only mode
   "enableRequestLogger": true,
   "enableJWTAuthorisation": false,
   "enableOAuth": false,
-  "oauthJWKSEndpoint": "https://login.microsoftonline.com/<TODO_TENANT_ID>/discovery/v2.0/keys",
-  "enableLocalhostAuthorization": false,
-  "skipOAuth": [
-    "/assets",
-    "/bdns",
-    "/bundles",
-    "/getAuthorization",
-    "/external-volume/config/oauthConfig.js",
-    "/leaflet-wallet/",
-    "/external-volume/wallets/leaflet-wallet/",
-    "/cloud-wallet/",
-    "/directory-summary/",
-    "/iframe/"
-  ],
-  "oauthConfig": {
-    "issuer": {
-      "issuer": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/v2.0/",
-      "authorizationEndpoint": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/v2.0/authorize",
-      "tokenEndpoint": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/v2.0/token"
-    },
-    "client": {
-      "clientId": "<TODO_CLIENT_ID>",
-      "scope": "email offline_access openid api://<TODO_CLIENT_ID>/access_as_user",
-      "redirectPath": "https://<TODO_DNS_NAME>/?root=true",
-      "clientSecret": "<TODO_CLIENT_SECRET>",
-      "logoutUrl": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/logout",
-      "postLogoutRedirectUrl": "https://<TODO_DNS_NAME>/?logout=true"
-    },
-    "sessionTimeout": 1800000,
-    "keyTTL": 3600000,
-    "debugLogEnabled": false
-  },
-  "serverAuthentication": false
+  "enableLocalhostAuthorization": false
 }
 {{- end }}
 
