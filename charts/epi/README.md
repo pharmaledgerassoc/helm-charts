@@ -1,6 +1,6 @@
 # epi
 
-![Version: 0.8.4](https://img.shields.io/badge/Version-0.8.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.0-rc72](https://img.shields.io/badge/AppVersion-3.0.0--rc28-informational?style=flat-square)
+![Version: 0.8.5](https://img.shields.io/badge/Version-0.8.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.0.0-rc73](https://img.shields.io/badge/AppVersion-3.0.0--rc28-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger epi (electronic product information) application
 
@@ -158,7 +158,7 @@ It is recommended to put non-sensitive configuration values in an configuration 
 2. Install via helm to namespace `default`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.8.4 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.8.5 \
         --install \
         --values my-config.yaml \
     ```
@@ -366,7 +366,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.8.4 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.8.5 \
         --install \
         --namespace=my-namespace \
         --values my-config.yaml \
@@ -377,7 +377,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.8.4 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.8.5 \
         --install \
         --wait --timeout=600s \
         --values my-config.yaml \
@@ -412,7 +412,7 @@ Tests can be found in [tests](./tests)
 | builder.image.pullPolicy | string | `"Always"` | Image Pull Policy for the builder. |
 | builder.image.repository | string | `"pharmaledger/epi-builder"` | The repository of the container image for the builder. <!-- # pragma: allowlist secret --> |
 | builder.image.sha | string | `"7013b176c84e3e06266e12579a371139a6c22f1ca80fb82753c453fb752d981d"` | sha256 digest of the image for the builder. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
-| builder.image.tag | string | `"3.0.0-rc72"` | Image tag for the builder. Default to v1.3.1 |
+| builder.image.tag | string | `"3.0.0-rc73"` | Image tag for the builder. Default to v1.3.1 |
 | builder.podSecurityContext | object | `{"fsGroup":1000,"runAsGroup":1000,"runAsUser":1000}` | Pod Security Context for the builder. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
 | builder.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"privileged":false,"readOnlyRootFilesystem":false,"runAsGroup":1000,"runAsNonRoot":true,"runAsUser":1000}` | Security Context for the builder container See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container) |
 | builder.sleepTime | string | `"10s"` | The time to sleep between start of apihub (npm run server) and build process (npm run build-all) |
@@ -422,7 +422,7 @@ Tests can be found in [tests](./tests)
 | config.dev | string | `"true"` | Enable Dev mode |
 | config.domain | string | `"epipoc"` | The Domain, e.g. "epipoc" |
 | config.enclaveType | string | `"VersionlessDSUEnclave"` | DSU fabric enclave type |
-| config.epiVersion | string | `"3.0.0-rc72"` | The epi version |
+| config.epiVersion | string | `"3.0.0-rc73"` | The epi version |
 | config.ethadapterUrl | string | `"http://ethadapter.ethadapter:3000"` | The Full URL of the Ethadapter including protocol and port, e.g. "https://ethadapter.my-company.com:3000" |
 | config.fabricEnabled | string | `"false"` | Enable standalone dsu-fabric (for version >= 3.0.0) |
 | config.overrides.apihubJson | string | `""` | Option to explitly set the apihub.json instead of using the default from [https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json). Note: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault. <br/> Settings: [https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3](https://docs.google.com/document/d/1mg35bb1UBUmTpL1Kt4GuZ7P0K_FMqt2Mb8B3iaDf52I/edit#heading=h.z84gh8sclah3) <br/> For SSO (not enabled by default): <br/> 1. "enableOAuth": true <br/> 2. "serverAuthentication": true <br/> 3. For SSO via OAuth with Azure AD, replace <TODO_*> with appropriate values.    For other identity providers (IdP) (e.g. Google, Ping, 0Auth), refer to documentation.    "redirectPath" must match the redirect URL configured at IdP <br/> 4. Add these values to "skipOAuth": "/leaflet-wallet/", "/directory-summary/", "/iframe/" |
@@ -484,7 +484,7 @@ Tests can be found in [tests](./tests)
 | runner.image.pullPolicy | string | `"Always"` | Image Pull Policy for the runner |
 | runner.image.repository | string | `"pharmaledger/epi-runner"` | The repository of the container image for the runner <!-- # pragma: allowlist secret --> |
 | runner.image.sha | string | `"5ea9a0857d243700872c29866bd68662ec3e246718ba88d2b5e3fbe453864d4b"` | sha256 digest of the image. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
-| runner.image.tag | string | `"3.0.0-rc72"` | Overrides the image tag whose default is the chart appVersion. Default to v1.3.1 |
+| runner.image.tag | string | `"3.0.0-rc73"` | Overrides the image tag whose default is the chart appVersion. Default to v1.3.1 |
 | runner.livenessProbe | object | `{"failureThreshold":3,"httpGet":{"httpHeaders":[{"name":"Host","value":"localhost"}],"path":"/installation-details","port":"http"},"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1}` | Liveness probe. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | runner.podAnnotations | object | `{}` | Annotations added to the runner pod |
 | runner.podSecurityContext | object | `{"fsGroup":1000,"runAsGroup":1000,"runAsUser":1000}` | Pod Security Context for the runner. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
