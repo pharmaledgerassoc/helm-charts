@@ -222,7 +222,7 @@ leafletReader:
   enabled: true
   # the number of leaflet-reader deployment replicas
   replicaCount: 1
-  
+
 # Settings for Containers with kubectl installed used by Jobs "pre-builder", "pre-upgrade-volumesnapshot", "final-volumesnapshot" and "cleanup"
 kubectl:
   # -- Time to keep the Job after finished in case of an error. If no error occured the Jobs will immediately by deleted.
