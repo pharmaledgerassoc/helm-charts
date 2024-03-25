@@ -11,7 +11,7 @@ config:
   # -- The Vault domain, should be vault.company, e.g. vault.my-company
   vaultDomain: "vault.my-company"
   # -- DSU fabric enclave type
-  enclaveType: "VersionlessDSUEnclave"
+  enclaveType: "WalletDBEnclave"
   # -- The Full URL of the Ethadapter including protocol and port, e.g. "https://ethadapter.my-company.com:3000"
   ethadapterUrl: "http://ethadapter.ethadapter:3000"
   # -- A CompanyName which is displayed on the web page.
@@ -21,11 +21,11 @@ config:
   # -- Base64 encoded 32 bytes string
   ssoSecretsEncryptionKey: ""
   # -- Enable Dev mode
-  dev: "true"
+  dev: "false"
   # -- Enable standalone dsu-fabric (for version >= 3.0.0)
-  fabricEnabled: "false"
+  fabricEnabled: "true"
   # -- The epi version
-  epiVersion: "3.0.0-rc28"
+  epiVersion: "3.0.0"
   overrides:
     # -- Option to explicitly override the environment.js file used for demiurge-wallet instead of using the predefined template.
     # Note: Usually not required
