@@ -83,7 +83,7 @@ spec:
             mountPath: /ePI-workspace/apihub-root/external-volume/config/bdns.hosts
             subPath: bdns.hosts
             readOnly: true
-          - name: leaflet-reader-secret-volume
+          - name: epi-secret-volume
             mountPath: /ePI-workspace/env.json
             subPath: env.json
             readOnly: true
@@ -115,17 +115,9 @@ spec:
             defaultMode: 0400
         {{- end }}
         - name: leaflet-reader-secret-volume
-        {{- if .Values.secretProviderClass.enabled }}
-          csi:
-            driver: secrets-store.csi.k8s.io
-            readOnly: true
-            volumeAttributes:
-              secretProviderClass: leaflet-reader-secret
-        {{- else }}
           secret:
-            secretName: {{ include "epi.fullname" . }}
+            secretName: leaflet-reader-secret
             defaultMode: 0400
-        {{- end }}
         - name: epi-bdns-config-volume
           configMap:
             name: {{ include "epi.fullname" . }}-bdns

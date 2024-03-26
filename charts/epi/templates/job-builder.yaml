@@ -88,11 +88,15 @@ spec:
             echo "=======> Not build yet!"
             echo "=======> Starting application in background process ..."
             export ENABLE_SSO=false
-            npm run server &
-            server_pid=$!
+            tail -f server.log &
+            npm run server > server.log 2>&1 &
+            server_pid=$
             echo "=======> Application running in background with PID=$server_pid"
-            echo "=======> Sleeping for {{ .Values.builder.sleepTime }} ..."
-            sleep {{ .Values.builder.sleepTime }}
+            SEARCH_STRING="ready to receive requests"
+            while ! grep -q "$SEARCH_STRING" server.log; do
+              sleep {{ .Values.builder.sleepTime }}
+            done
+            echo "=======> Server is ready."
             echo "=======> Starting build process ..."
             node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./bin/octopusRun.js epi-ssapps-and-wallets-build"
             node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./node_modules/octopus/scripts/run patch"
