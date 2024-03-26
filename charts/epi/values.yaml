@@ -22,8 +22,6 @@ config:
   ssoSecretsEncryptionKey: ""
   # -- Enable Dev mode
   dev: "false"
-  # -- Enable standalone dsu-fabric (for version >= 3.0.0)
-  fabricEnabled: "true"
   # -- The epi version
   epiVersion: "3.0.0"
   overrides:
