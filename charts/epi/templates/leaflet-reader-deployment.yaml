@@ -83,7 +83,7 @@ spec:
             mountPath: /ePI-workspace/apihub-root/external-volume/config/bdns.hosts
             subPath: bdns.hosts
             readOnly: true
-          - name: leaflet-reader-secret-volume
+          - name: epi-secret-volume
             mountPath: /ePI-workspace/env.json
             subPath: env.json
             readOnly: true
