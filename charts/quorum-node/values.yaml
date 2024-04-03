@@ -4,16 +4,15 @@
 
 image:
   # -- The repository of the Quorum container image
-  repository: 061089524335.dkr.ecr.eu-west-1.amazonaws.com/quorum
+  repository: "public.ecr.aws/s6w3n1u5/quorum"
   # -- Image Pull Policy
   pullPolicy: Always
   # -- Image tag
-  tag: "22.7.0"
+  tag: "23.4.0-securityFix2"
   # -- sha256 digest of the image.
   # Do not add the prefix "@sha256:".
-  # Defaults to the digest of tag "22.7.0"
   # <!-- # pragma: allowlist secret -->
-  sha: "7614e22e0c27732973caca398184b42a013d87ed23b50c536cb21f709668b82d"  # pragma: allowlist secret
+  sha: "1725008713cdd8167ee911141d4adcd8e60fb684f988053ed60bd4e90ee62acd"  # pragma: allowlist secret
 
 ## -- The strategy of the deployment. Defaults to Recreate as a PVC is bound to it.
 ## See `kubectl explain deployment.spec.strategy` for more and [https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy)
@@ -151,7 +150,7 @@ persistence:
     # If empty or not set then storage class will not be set - which means that the default storage class will be used.
     storageClassName: ""
     # -- Size of the data PVC volume.
-    size: "3Gi"
+    size: "24Gi"
     # -- Annotations for the data PVC.
     annotations: {}
     # -- Finalizers for data PVC.
@@ -207,7 +206,7 @@ persistence:
     # If empty or not set then storage class will not be set - which means that the default storage class will be used.
     storageClassName: ""
     # -- Size of the logs PVC volume.
-    size: "1Gi"
+    size: "8Gi"
     # -- Annotations for the logs PVC.
     annotations: {}
     # -- Finalizers for logs PVC.

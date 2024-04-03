@@ -30,3 +30,26 @@ spec:
 
 {{- end }}
 {{- end }}
+
+
+{{- define "leafletReader.secretProviderClass" -}}
+{{- $ := index . 0 }}
+{{- $suffix := index . 2 }}
+{{- $annotations := index . 3 }}
+{{- with index . 1 }}
+apiVersion: {{ .Values.secretProviderClass.apiVersion }}
+kind: SecretProviderClass
+metadata:
+  name: leaflet-reader-secret
+  namespace: {{ template "epi.namespace" . }}
+  {{- with $annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "epi.labels" . | nindent 4 }}
+spec:
+  {{- toYaml .Values.secretProviderClass.spec | nindent 2 }}
+
+{{- end }}
+{{- end }}
