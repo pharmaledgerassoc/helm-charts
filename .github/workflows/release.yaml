@@ -20,8 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
         name: Checkout
-        ref: ${{ inputs.branch }}
         with:
+          ref: ${{ inputs.branch }}
           fetch-depth: 0
 
       - name: Configure Git
