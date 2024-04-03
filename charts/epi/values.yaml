@@ -381,7 +381,7 @@ secretProviderClass:
     #           objectAlias: apihub.json
 
 # Ingress settings for the runner
-ingressPublic:
+ingress:
   # -- Whether to create ingress or not for the runner.
   # <br/>
   # Note: For ingress an Ingress Controller (e.g. AWS LB Controller, NGINX Ingress Controller, Traefik, ...) is required and service.type should be ClusterIP or NodePort depending on your configuration
