@@ -1202,6 +1202,20 @@ entries:
   ethadapter:
   - apiVersion: v2
     appVersion: 3.0.0-rc3
+    created: "2024-04-04T07:08:41.438537615Z"
+    description: A Helm chart for Pharma Ledger Ethereum Adapter Service
+    digest: e6a17de3b9f4cd377a4a60d428b4a2be297bd1213fa8ff4241ba69fbb406da70
+    icon: https://avatars.githubusercontent.com/u/60230259?s=200&v=4
+    maintainers:
+    - name: skutner
+      url: https://github.com/skutner
+    name: ethadapter
+    type: application
+    urls:
+    - https://github.com/pharmaledgerassoc/helm-charts/releases/download/ethadapter-0.7.19/ethadapter-0.7.19.tgz
+    version: 0.7.19
+  - apiVersion: v2
+    appVersion: 3.0.0-rc3
     created: "2024-03-20T08:32:00.727292562Z"
     description: A Helm chart for Pharma Ledger Ethereum Adapter Service
     digest: 3c112b959c05f71db7255bf1b5687b5769a61de6ae45b1f65453fb9f6db63416
@@ -2008,6 +2022,17 @@ entries:
   quorum-node:
   - apiVersion: v2
     appVersion: 23.4.0-securityFix2
+    created: "2024-04-04T07:08:41.604539724Z"
+    description: A Helm chart for the deployment of the quorum node on Kubernetes
+      supporting new-network, join-network and update-partners-info use cases.
+    digest: 17f3e5398b927711380134f1495596495aecfca148f1c7e148e46fcbb4af4dd2
+    name: quorum-node
+    type: application
+    urls:
+    - https://github.com/pharmaledgerassoc/helm-charts/releases/download/quorum-node-0.7.1/quorum-node-0.7.1.tgz
+    version: 0.7.1
+  - apiVersion: v2
+    appVersion: 23.4.0-securityFix2
     created: "2024-03-19T23:57:04.348329025Z"
     description: A Helm chart for the deployment of the quorum node on Kubernetes
       supporting new-network, join-network and update-partners-info use cases.
@@ -2576,4 +2601,4 @@ entries:
     urls:
     - https://github.com/pharmaledgerassoc/helm-charts/releases/download/standalone-quorum-0.3.0/standalone-quorum-0.3.0.tgz
     version: 0.3.0
-generated: "2024-03-20T11:42:59.625028954Z"
+generated: "2024-04-04T07:08:41.605772312Z"
