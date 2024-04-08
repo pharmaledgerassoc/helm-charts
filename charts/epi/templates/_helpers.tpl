@@ -63,6 +63,14 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
+Selector labels for leaflet reader
+*/}}
+{{- define "epi.leafletReaderSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "epi.name" . }}LeafletReader
+app.kubernetes.io/instance: {{ .Release.Name }}LeafletReader
+{{- end }}
+
+{{/*
 Selector labels for runner used by kubectl --selector=key1=value1,key2=value2
 */}}
 {{- define "epi.selectorLabelsKubectl" -}}
@@ -143,11 +151,16 @@ Configuration env.json
 {
   "PSK_TMP_WORKING_DIR": "tmp",
   "PSK_CONFIG_LOCATION": "../apihub-root/external-volume/config",
-  "DEV": false,
+  "DEV": {{ required "config.dev must be set" .Values.config.dev | quote}},
   "VAULT_DOMAIN": {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote}},
   "BUILD_SECRET_KEY": {{ required "config.buildSecretKey must be set" .Values.config.buildSecretKey | quote}},
+  "SSO_SECRETS_ENCRYPTION_KEY": {{ required "config.ssoSecretsEncryptionKey must be set" .Values.config.ssoSecretsEncryptionKey | quote}},
   "BDNS_ROOT_HOSTS": "http://127.0.0.1:8080",
-  "OPENDSU_ENABLE_DEBUG": true
+  "OPENDSU_ENABLE_DEBUG": false,
+  "EPI_DOMAIN": {{ required "config.domain must be set" .Values.config.domain | quote}},
+  "EPI_SUBDOMAIN": {{ required "config.subDomain must be set" .Values.config.subDomain | quote}},
+  "EPI_VERSION": {{ required "config.epiVersion must be set" .Values.config.epiVersion | quote}},
+  "MIGRATION_FOLDER_PATH": "../../../../apihub-root/migrations"
 }
 {{- end }}
 
@@ -163,23 +176,17 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
   "activeComponents": [
     "virtualMQ",
     "messaging",
-    "notifications",
     "filesManager",
     "bdns",
-    "bricksLedger",
     "bricksFabric",
     "bricking",
     "anchoring",
-    "dsu-wizard",
-    "gtin-dsu-wizard",
     "epi-mapping-engine",
     "epi-mapping-engine-results",
     "leaflet-web-api",
     "get-gtin-owner",
-    "acdc-reporting",
     "debugLogger",
     "mq",
-    "secrets",
     "staticServer"
   ],
   "componentsConfig": {
@@ -198,13 +205,6 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
     "get-gtin-owner": {
       "module": "./../../gtin-resolver",
       "function": "getGTINOwner"
-    },
-    "acdc-reporting": {
-      "module": "./../../reporting-service/middleware",
-      "function": "Init"
-    },
-    "gtin-dsu-wizard": {
-      "module": "./../../gtin-dsu-wizard"
     },
     "staticServer": {
       "excludedFiles": [
@@ -254,6 +254,51 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
     "debugLogEnabled": false
   },
   "serverAuthentication": false
+}
+{{- end }}
+
+{{/*
+Configuration apihub.json for read only mode
+*/}}
+{{- define "epi.readOnlyApihubJson" -}}
+{
+  "storage": "../apihub-root",
+  "port": 8080,
+  "preventRateLimit": true,
+  "activeComponents": [
+    "bdns",
+    "bricking",
+    "anchoring",
+    "leaflet-web-api",
+    "get-gtin-owner",
+    "debugLogger",
+    "staticServer"
+  ],
+  "componentsConfig": {
+    "leaflet-web-api": {
+      "module": "./../../gtin-resolver",
+      "function": "getWebLeaflet"
+    },
+    "get-gtin-owner": {
+      "module": "./../../gtin-resolver",
+      "function": "getGTINOwner"
+    },
+    "staticServer": {
+      "excludedFiles": [
+        ".*.secret"
+      ]
+    },
+    "bricking": {},
+    "anchoring": {}
+  },
+  "responseHeaders": {
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-XSS-Protection": "1; mode=block"
+  },
+  "enableRequestLogger": true,
+  "enableJWTAuthorisation": false,
+  "enableOAuth": false,
+  "enableLocalhostAuthorization": false
 }
 {{- end }}
 

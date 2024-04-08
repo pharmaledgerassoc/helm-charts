@@ -1,6 +1,6 @@
 # quorum-node
 
-![Version: 0.6.5](https://img.shields.io/badge/Version-0.6.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 22.7.0](https://img.shields.io/badge/AppVersion-22.7.0-informational?style=flat-square)
+![Version: 0.6.6](https://img.shields.io/badge/Version-0.6.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0](https://img.shields.io/badge/AppVersion-23.4.0-informational?style=flat-square)
 
 A Helm chart for the deployment of the quorum node on Kubernetes supporting new-network, join-network and update-partners-info use cases.
 
@@ -62,7 +62,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.5 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json \
@@ -87,7 +87,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.5 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json \
   --set-file use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json
@@ -111,7 +111,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.5 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json \
@@ -136,7 +136,7 @@ use_case:
 ```
 
 ```shell
-helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.5 \
+helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6.7 \
   --values ./my-values.yaml \
   --set-file use_case.newNetwork.plugin_data_common=./new-network.plugin.json \
   --set-file use_case.newNetwork.plugin_data_secrets=./new-network.plugin.secrets.json
@@ -161,7 +161,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.5 \
+    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.7 \
       --install \
       --namespace=my-namespace \
       --values my-values.yaml \
@@ -172,7 +172,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.5 \
+    helm upgrade my-release-name pharmaledgerassoc/quorum-node --version=0.6.7 \
       --install \
       --wait --timeout=600s \
       --values my-values.yaml \
@@ -200,8 +200,8 @@ helm delete quorum-node-0 \
 | fullnameOverride | string | `""` | Override the full name |
 | image.pullPolicy | string | `"Always"` | Image Pull Policy |
 | image.repository | string | `"061089524335.dkr.ecr.eu-west-1.amazonaws.com/quorum"` | The repository of the Quorum container image |
-| image.sha | string | `"7614e22e0c27732973caca398184b42a013d87ed23b50c536cb21f709668b82d"` | sha256 digest of the image. Do not add the prefix "@sha256:". Defaults to the digest of tag "22.7.0" <!-- # pragma: allowlist secret --> |
-| image.tag | string | `"22.7.0"` | Image tag |
+| image.sha | string | `"7614e22e0c27732973caca398184b42a013d87ed23b50c536cb21f709668b82d"` | sha256 digest of the image. Do not add the prefix "@sha256:". Defaults to the digest of tag "23.4.0" <!-- # pragma: allowlist secret --> |
+| image.tag | string | `"23.4.0"` | Image tag |
 | imagePullSecrets | list | `[]` | Secret(s) for pulling an container image from a private registry. See [https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) |
 | kubectl.image.pullPolicy | string | `"Always"` | Image Pull Policy |
 | kubectl.image.repository | string | `"bitnami/kubectl"` | The repository of the container image containing kubectl |

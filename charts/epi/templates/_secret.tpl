@@ -45,3 +45,31 @@ data:
 
 {{- end }}
 {{- end }}
+
+{{- define "leafletReader.secret" -}}
+{{- $ := index . 0 }}
+{{- $suffix := index . 2 }}
+{{- $annotations := index . 3 }}
+{{- with index . 1 }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: leaflet-reader-secret
+  namespace: {{ template "epi.namespace" . }}
+  {{- with $annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "epi.labels" . | nindent 4 }}
+type: Opaque
+data:
+  apihub.json: |-
+{{- if .Values.config.overrides.readOnlyApihubJson }}
+{{ .Values.config.overrides.readOnlyApihubJson | b64enc | indent 4 }}
+{{- else }}
+{{ include "epi.readOnlyApihubJson" . | b64enc | indent 4 }}
+{{- end }}
+
+{{- end }}
+{{- end }}
