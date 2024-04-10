@@ -29,7 +29,7 @@ data:
   # See https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.0/apihub-root/external-volume/config/bdns.hosts
   bdns.hosts: |-
     {
-      {{ .Values.config.domain }}: {
+      "{{ .Values.config.domain }}": {
           "anchoringServices": [
               "$ORIGIN"
           ],
@@ -37,7 +37,7 @@ data:
               "$ORIGIN"
           ]
       },
-      {{ .Values.config.subDomain }}: {
+      "{{ .Values.config.subDomain }}": {
           "brickStorages": [
               "$ORIGIN"
           ],
@@ -48,7 +48,7 @@ data:
               "$ORIGIN"
           ]
       },
-      {{ .Values.config.vaultDomain }}: {
+      "{{ .Values.config.vaultDomain }}": {
           "replicas": [],
           "brickStorages": [
               "$ORIGIN"
