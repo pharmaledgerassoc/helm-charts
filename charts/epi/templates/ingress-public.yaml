@@ -54,7 +54,7 @@ spec:
                 port:
                   number: {{ $svcPort }}
               {{- else }}
-              serviceName: {{ $fullName }}
+              serviceName: {{ $fullName }}-leaflet-reader
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}
