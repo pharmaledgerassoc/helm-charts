@@ -88,8 +88,8 @@ spec:
             echo "=======> Not build yet!"
             echo "=======> Starting application in background process ..."
             export ENABLE_SSO=false
-            tail -f server.log &
             npm run server > server.log 2>&1 &
+            tail -f server.log &
             server_pid=$
             echo "=======> Application running in background with PID=$server_pid"
             SEARCH_STRING="ready to receive requests"
