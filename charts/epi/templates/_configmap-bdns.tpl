@@ -28,11 +28,8 @@ metadata:
 data:
   # See https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.0/apihub-root/external-volume/config/bdns.hosts
   bdns.hosts: |-
-{{- if .Values.config.overrides.bdnsHosts }}
-{{ .Values.config.overrides.bdnsHosts | indent 4 }}
-{{- else }}
     {
-      "epipoc": {
+      "{{ .Values.config.domain }}": {
           "anchoringServices": [
               "$ORIGIN"
           ],
@@ -40,7 +37,7 @@ data:
               "$ORIGIN"
           ]
       },
-      "epipoc.my-company": {
+      "{{ .Values.config.subDomain }}": {
           "brickStorages": [
               "$ORIGIN"
           ],
@@ -51,18 +48,7 @@ data:
               "$ORIGIN"
           ]
       },
-      "epipoc.other": {
-          "brickStorages": [
-              "https://epipoc.other-company.com"
-          ],
-          "anchoringServices": [
-              "https://epipoc.other-company.com"
-          ],
-          "notifications": [
-              "https://epipoc.other-company.com"
-          ]
-      },
-      "vault.my-company": {
+      "{{ .Values.config.vaultDomain }}": {
           "replicas": [],
           "brickStorages": [
               "$ORIGIN"
@@ -75,7 +61,6 @@ data:
           ]
       }
     }
-{{- end }}
 
 {{- end }}
 {{- end }}
