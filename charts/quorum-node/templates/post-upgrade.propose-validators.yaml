@@ -1,4 +1,4 @@
-{{- if .Values.use_case.updatePartnersInfo.enabled }}
+{{- if false }}
 ---
 apiVersion: batch/v1
 kind: Job
