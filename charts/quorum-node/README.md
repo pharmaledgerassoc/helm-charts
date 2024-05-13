@@ -1,6 +1,6 @@
 # quorum-node
 
-![Version: 0.6.6](https://img.shields.io/badge/Version-0.6.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0](https://img.shields.io/badge/AppVersion-23.4.0-informational?style=flat-square)
+![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 23.4.0-securityFix5](https://img.shields.io/badge/AppVersion-23.4.0securityFix5-informational?style=flat-square)
 
 A Helm chart for the deployment of the quorum node on Kubernetes supporting new-network, join-network and update-partners-info use cases.
 
@@ -45,7 +45,7 @@ These four installation samples demonstrate
 
 ### Option 1: Join Network followed by updating the PartnerInfo
 
-The **most common option** is to [join an existing network](../../usecases/join-network/readme.md) and to [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - which proposes PartnerNodes to Validators.
+The **most common option** is to [join an existing network](../../usecases/join-network/readme.md) and to [update the PartnerInfo](../../usecases/update-partners-info/readme.md).
 
 Also see **[Full Sample](./docs/full_sample/README.md)**.
 
@@ -96,7 +96,7 @@ helm upgrade --install quorum-node-0 pharmaledgerassoc/quorum-node --version=0.6
 
 ### Option 3: New Network followed by updating the PartnerInfo
 
-Create a [New network](../../usecases/new-network/readme.md) and [update the PartnerInfo](../../usecases/update-partners-info/readme.md) - which proposes PartnerNodes to Validators.
+Create a [New network](../../usecases/new-network/readme.md) and [update the PartnerInfo](../../usecases/update-partners-info/readme.md).
 
 ```yaml
 use_case:

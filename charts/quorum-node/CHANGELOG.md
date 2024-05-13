@@ -17,3 +17,8 @@
   - Reacts to config changes and restart quorum node [https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments](https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments)
   - Follows standard Helm naming conventions (e.g. use `fullnameOverride` to set fix names) and removed function "quorum-node.Identifier"
   - Some minor fixes
+
+- From 0.7.x to 0.8.x
+  - Remove post-upgrade propose validators functionality
+  - Update values.yaml config image to `23.4.0-securityFix5`
+  - Documentation updates
