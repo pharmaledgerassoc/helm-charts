@@ -2,7 +2,7 @@
 
 ## updatePartnersInfo use case
 
-Update peers/validators information in the Quorum Blockchain Node. 
+Update peers information in the Quorum Blockchain Node. 
 
 Chart name: quorum-node <br/>
 Plugin : update-partners-info
@@ -59,9 +59,9 @@ git_shared_configuration:
 
 #### Step 4: Install the helm chart
 
-1. Use the _pl-plugin_ plugin to download and aggregate the quorum node connection details and network validators list. 
+1. Use the _pl-plugin_ plugin to download and aggregate the quorum node connection details and network peers list. 
    The execution of the plugin will produce:
-   1. _update-partners-info.plugin.json_ file that will contain all the generated information, like the list of all validators and enode connections. The json file will be used by the helm charts.
+   1. _update-partners-info.plugin.json_ file that will contain all the generated information, like the list of all peers and enode connections. The json file will be used by the helm charts.
    
 ```shell
 helm pl-plugin --updatePartnersInfo -i ./my-values.yaml -o .
@@ -82,7 +82,7 @@ helm upgrade --install qn-0 pharmaledgerassoc/quorum-node -f ./my-values.yaml --
 helm upgrade --install qn-0 pharmaledgerassoc/quorum-node -f ./my-values.yaml --set-file use_case.joinNetwork.plugin_data_common=./join-network.plugin.json,use_case.joinNetwork.plugin_data_secrets=./join-network.plugin.secrets.json,use_case.updatePartnersInfo.plugin_data_common=./update-partners-info.plugin.json
 ```
 
-The execution of the chart will update all the peers and propose all the peers as validators.
+The execution of the chart will update all the peers. Validator proposal of a peer needs to be done at a next step.
 
 #### Step 5: Backup your installation and private information
 
