@@ -89,6 +89,9 @@ spec:
             echo "=======> Starting application in background process ..."
             export ENABLE_SSO=false
             npm run server > server.log 2>&1 &
+            until [ -f server.log ]; do
+              sleep 1
+            done
             tail -f server.log &
             server_pid=$
             echo "=======> Application running in background with PID=$server_pid"
