@@ -103,11 +103,14 @@ spec:
             # Mounts for environment configs to trust-loader
             #
           - name: epi-env-volume
-            mountPath: /ePI-workspace/trust-loader-config/demiurge-wallet/loader/environment.js
-            subPath: demiurge-environment.js
-            readOnly: true
-          - name: epi-env-volume
             mountPath: /ePI-workspace/trust-loader-config/dsu-explorer/loader/environment.js
+            subPath: dsu-explorer-environment.js
+            readOnly: true
+            #
+            # Mounts for environment configs to wallets itself
+            #
+          - name: epi-env-volume
+            mountPath: /ePI-workspace/apihub-root/dsu-explorer/loader/environment.js
             subPath: dsu-explorer-environment.js
             readOnly: true
           - name: epi-env-volume
@@ -115,39 +118,8 @@ spec:
             subPath: dsu-fabric-environment.js
             readOnly: true
           - name: epi-env-volume
-            mountPath: /ePI-workspace/trust-loader-config/dsu-fabric-wallet/loader/environment.js
-            subPath: dsu-fabric-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/dsu-fabric/environment.js
-            subPath: dsu-fabric-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/trust-loader-config/leaflet-wallet/loader/environment.js
-            subPath: leaflet-environment.js
-            readOnly: true
-            #
-            # Mounts for environment configs to wallets itself
-            #
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/demiurge-wallet/loader/environment.js
+            mountPath: /ePI-workspace/apihub-root/demiurge/environment.js
             subPath: demiurge-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/dsu-explorer/loader/environment.js
-            subPath: dsu-explorer-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/dsu-fabric-wallet/loader/environment.js
-            subPath: dsu-fabric-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/leaflet-wallet/loader/environment.js
-            subPath: leaflet-environment.js
-            readOnly: true
-          - name: epi-env-volume
-            mountPath: /ePI-workspace/apihub-root/lightweight-pwa/environment.js
-            subPath: lpwa-environment.js
             readOnly: true
 
       volumes:

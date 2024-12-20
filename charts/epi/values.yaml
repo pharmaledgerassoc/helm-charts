@@ -220,6 +220,16 @@ leafletReader:
   enabled: true
   # the number of leaflet-reader deployment replicas
   replicaCount: 1
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - epi
+          topologyKey: "kubernetes.io/hostname"
 
 # Settings for Containers with kubectl installed used by Jobs "pre-builder", "pre-upgrade-volumesnapshot", "final-volumesnapshot" and "cleanup"
 kubectl:
@@ -513,7 +523,28 @@ tolerations: []
 
 # -- Affinity for scheduling a pod.
 # See [https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
-affinity: {}
+affinity:
+  podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: app.kubernetes.io/name
+          operator: In
+          values:
+          - epi
+          - epiLeafletReader
+      topologyKey: "kubernetes.io/hostname"
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions:
+          - key: app.kubernetes.io/name
+            operator: In
+            values:
+            - quorum
+        topologyKey: "kubernetes.io/hostname"
 
 # Config Settings for creating Kubernetes VolumeSnapshots on upgrades.
 volumeSnapshots:
