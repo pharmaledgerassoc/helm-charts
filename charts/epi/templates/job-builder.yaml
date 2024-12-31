@@ -89,6 +89,9 @@ spec:
             echo "=======> Starting application in background process ..."
             export ENABLE_SSO=false
             npm run server > server.log 2>&1 &
+            until [ -f server.log ]; do
+              sleep 1
+            done
             tail -f server.log &
             server_pid=$
             echo "=======> Application running in background with PID=$server_pid"
@@ -98,8 +101,10 @@ spec:
             done
             echo "=======> Server is ready."
             echo "=======> Starting build process ..."
-            node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./bin/octopusRun.js epi-ssapps-and-wallets-build"
-            node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./node_modules/octopus/scripts/run patch"
+            node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./bin/octopusRun.js buildApps"
+            if test -d dsu-fabric-ssapp; then
+                npm run build-old-ssapps
+            fi
             rc=$?
             echo "=======> Build process done - rc=$rc"
             if [ $rc -ne 0 ]
