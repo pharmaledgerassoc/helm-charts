@@ -9,7 +9,7 @@ on:
   push:
     branches:
       - master
-      - main
+      - 4.0.0-rc
   workflow_dispatch:
 
 jobs:
