@@ -9,7 +9,7 @@ on:
   push:
     branches:
       - master
-      - 3.0.0-rc3
+      - 4.0.0-rc
 
 jobs:
   release:
