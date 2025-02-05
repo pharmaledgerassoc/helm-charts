@@ -10,7 +10,6 @@ on:
     branches:
       - master
       - 4.0.0-rc
-  workflow_dispatch:
 
 jobs:
   release:
