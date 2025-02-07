@@ -85,7 +85,7 @@ data:
       "pwa": false,
       "allowPinLogin": false,
       "companyName": {{ required "config.companyName must be set" .Values.config.companyName | quote }},
-      "disabledFeatures": "02, 04, 05, 06, 07, 08, 09",
+      "disabledFeatures": "02, 04, 05, 06, 07, 09",
       "lockFeatures": true,
       "epiProtocolVersion": 1,
       "appBuildVersion": {{ required "config.epiVersion must be set" .Values.config.epiVersion | quote}}
@@ -112,7 +112,7 @@ data:
       "pwa": false,
       "allowPinLogin": false,
       "lockFeatures": true,
-      "disabledFeatures": "02, 04, 05, 06, 07, 08, 09",
+      "disabledFeatures": "02, 04, 05, 06, 07, 09",
       "easterEggEnabled": true,
       "epiProtocolVersion": 1,
       "appBuildVersion": {{ required "config.epiVersion must be set" .Values.config.epiVersion | quote}}
