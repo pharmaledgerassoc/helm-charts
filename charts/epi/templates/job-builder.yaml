@@ -87,7 +87,7 @@ spec:
             cd /ePI-workspace
             echo "=======> Not build yet!"
             echo "=======> Running Script to Ensure Health Check File Struture"
-            ./ensureHealthCheckFileStruture.sh
+            ./bin/ensureHealthCheckFileStruture.sh
             echo "=======> Starting application in background process ..."
             export ENABLE_SSO=false
             npm run server > server.log 2>&1 &
