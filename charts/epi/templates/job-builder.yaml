@@ -86,6 +86,8 @@ spec:
             # Start server in background, wait, run build and copy seedBackup to shared folder with main container.
             cd /ePI-workspace
             echo "=======> Not build yet!"
+            echo "=======> Running Script to Ensure Health Check File Struture"
+            ./bin/ensureHealthCheckFileStruture.sh
             echo "=======> Starting application in background process ..."
             export ENABLE_SSO=false
             npm run server > server.log 2>&1 &
