@@ -1,6 +1,6 @@
 # epi
 
-![Version: 0.7.11-rc2](https://img.shields.io/badge/Version-0.7.11--rc2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.0.0-rc2](https://img.shields.io/badge/AppVersion-4.0.0--rc2-informational?style=flat-square)
+![Version: 0.7.11-rc4](https://img.shields.io/badge/Version-0.7.11--rc4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.0.0-rc4](https://img.shields.io/badge/AppVersion-4.0.0--rc4-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger epi (electronic product information) application
 
@@ -158,7 +158,7 @@ It is recommended to put non-sensitive configuration values in an configuration 
 2. Install via helm to namespace `default`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11-rc2 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11-rc4 \
         --install \
         --values my-config.yaml \
     ```
@@ -366,7 +366,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11-rc2 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11-rc4 \
         --install \
         --namespace=my-namespace \
         --values my-config.yaml \
@@ -377,7 +377,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11-rc2 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11-rc4 \
         --install \
         --wait --timeout=600s \
         --values my-config.yaml \
@@ -433,6 +433,7 @@ Tests can be found in [tests](./tests)
 | config.overrides.envJson | string | `""` | Option to explitly override the env.json for APIHub instead of using the predefined template. Note 1: Usually not required to override. Note 2: If secretProviderClass.enabled=true, then this value is ignored as it is used/mounted from Secret Vault. |
 | config.overrides.leafletEnvironmentJs | string | `""` | Option to explicitly override the environment.js file used for Leaflet Wallet instead of using the predefined template. Note: Usually not required |
 | config.overrides.lpwaEnvironmentJs | string | `""` | Option to explicitly override the environment.js file used for Lightweight PWA instead of using the predefined template. Note: Usually not required |
+| config.overrides.readOnlyApihubJson | string | `""` |  |
 | config.overrides.subDomainConfigJson | string | `""` | Option to explicitly override the config.json used for the subDomain instead of using the predefined template. Note: Usually not required |
 | config.overrides.vaultDomainConfigJson | string | `""` | Option to explicitly override the config.json used for the vaultDomain instead of using the predefined template. Note: Usually not required |
 | config.ssoSecretsEncryptionKey | string | `""` | Base64 encoded 32 bytes string |
@@ -491,7 +492,7 @@ Tests can be found in [tests](./tests)
 | runner.image.pullPolicy | string | `"Always"` | Image Pull Policy for the runner |
 | runner.image.repository | string | `"dregistry.pdmfc.com/pdmfcsa/epi-runner"` | The repository of the container image for the runner <!-- # pragma: allowlist secret --> |
 | runner.image.sha | string | `"b81a41ee0a9eb108b167fbcc5027f52ec8e3c3691af77cf1d47daeb2c5cd1530"` | sha256 digest of the image. Do not add the prefix "@sha256:" Default to v1.3.1 <!-- # pragma: allowlist secret --> |
-| runner.image.tag | string | `"4.0.0-dev2"` | Overrides the image tag whose default is the chart appVersion. Default to v1.3.1 |
+| runner.image.tag | string | `"4.0.0-rc4"` | Overrides the image tag whose default is the chart appVersion. Default to v1.3.1 |
 | runner.livenessProbe | object | `{"failureThreshold":3,"httpGet":{"httpHeaders":[{"name":"Host","value":"localhost"}],"path":"/installation-details","port":"http"},"initialDelaySeconds":10,"periodSeconds":10,"successThreshold":1,"timeoutSeconds":1}` | Liveness probe. See [https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/) |
 | runner.podAnnotations | object | `{}` | Annotations added to the runner pod |
 | runner.podSecurityContext | object | `{"fsGroup":1000,"runAsGroup":1000,"runAsUser":1000}` | Pod Security Context for the runner. See [https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod) |
