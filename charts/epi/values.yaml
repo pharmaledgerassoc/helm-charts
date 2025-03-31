@@ -73,6 +73,8 @@ config:
     # 4. Add these values to "skipOAuth": "/leaflet-wallet/", "/directory-summary/", "/iframe/"
     apihubJson: ""
 
+    readOnlyApihubJson: ""
+
     # -- Centrally managed and provided BDNS Hosts Config.
     # You must set this value in a non-sandbox environment!
     # See [templates/_configmap-bdns.tpl](templates/_configmap-bdns.tpl) for default value.
@@ -88,7 +90,7 @@ runner:
     pullPolicy: Always
     # -- Overrides the image tag whose default is the chart appVersion.
     # Default to v1.3.1
-    tag: "4.0.0-dev2"  # Note to developers: If you change this version also change appVersion in Chart.yaml
+    tag: "4.0.0-rc4"  # Note to developers: If you change this version also change appVersion in Chart.yaml
     # -- sha256 digest of the image.
     # Do not add the prefix "@sha256:"
     # Default to v1.3.1
