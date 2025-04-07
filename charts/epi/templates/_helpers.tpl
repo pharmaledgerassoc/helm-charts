@@ -174,19 +174,21 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
   "port": 8080,
   "preventRateLimit": true,
   "activeComponents": [
-    "virtualMQ",
-    "messaging",
-    "filesManager",
     "bdns",
-    "bricksFabric",
     "bricking",
     "anchoring",
+    "get-fixed-url",
     "epi-mapping-engine",
     "epi-mapping-engine-results",
-    "leaflet-web-api",
     "get-gtin-owner",
-    "debugLogger",
+    "leaflet-web-api",
+    "metadata",
+    "integration-api",
+    "health-check-api",
+    "versionlessDSU",
     "mq",
+    "secrets",
+    "lightDBEnclave",
     "staticServer"
   ],
   "componentsConfig": {
@@ -202,9 +204,32 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
       "module": "./../../gtin-resolver",
       "function": "getWebLeaflet"
     },
+    "metadata": {
+          "module": "./../../gtin-resolver",
+          "function": "getMetadata"
+    },
     "get-gtin-owner": {
       "module": "./../../gtin-resolver",
       "function": "getGTINOwner"
+    },
+    "get-fixed-url": {
+      "module": "./../../gtin-resolver",
+      "function": "getFixedUrl"
+    },
+    "integration-api": {
+      "module": "./../../gtin-resolver",
+      "function": "getIntegrationAPIs",
+      "requestLimiterConfig": {
+        "metadataCapacity": 5,
+        "epiCapacity": 5
+      }
+    },
+    "health-check-api": {
+          "module": "./../../gtin-resolver",
+          "function": "getHealthCheckAPIs"
+    },
+    "versionlessDSU": {
+      "module": "./components/versionlessDSU"
     },
     "staticServer": {
       "excludedFiles": [
@@ -227,15 +252,12 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
     "/assets",
     "/bdns",
     "/bundles",
-    "/getAuthorization",
-    "/external-volume/config/oauthConfig.js",
-    "/leaflet-wallet/",
-    "/external-volume/wallets/leaflet-wallet/",
-    "/cloud-wallet/",
-    "/directory-summary/",
-    "/iframe/"
+    "/gtinOwner/",
+    "/leaflets/",
+    "/metadata/"
   ],
   "oauthConfig": {
+    "whitelist": [],
     "issuer": {
       "issuer": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/v2.0/",
       "authorizationEndpoint": "https://login.microsoftonline.com/<TODO_TENANT_ID>/oauth2/v2.0/authorize",
@@ -269,7 +291,9 @@ Configuration apihub.json for read only mode
     "bdns",
     "bricking",
     "anchoring",
+    "get-fixed-url",
     "leaflet-web-api",
+    "metadata",
     "get-gtin-owner",
     "debugLogger",
     "staticServer"
@@ -282,6 +306,14 @@ Configuration apihub.json for read only mode
     "get-gtin-owner": {
       "module": "./../../gtin-resolver",
       "function": "getGTINOwner"
+    },
+    "get-fixed-url": {
+      "module": "./../../gtin-resolver",
+      "function": "getFixedUrl"
+    },
+    "metadata": {
+          "module": "./../../gtin-resolver",
+          "function": "getMetadata"
     },
     "staticServer": {
       "excludedFiles": [

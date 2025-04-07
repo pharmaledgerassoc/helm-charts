@@ -83,34 +83,9 @@ spec:
           - |
             # Exit on error
             set -e
-            # Start server in background, wait, run build and copy seedBackup to shared folder with main container.
             cd /ePI-workspace
-            echo "=======> Not build yet!"
-            echo "=======> Starting application in background process ..."
-            export ENABLE_SSO=false
-            npm run server > server.log 2>&1 &
-            until [ -f server.log ]; do
-              sleep 1
-            done
-            tail -f server.log &
-            server_pid=$
-            echo "=======> Application running in background with PID=$server_pid"
-            SEARCH_STRING="ready to receive requests"
-            while ! grep -q "$SEARCH_STRING" server.log; do
-              sleep {{ .Values.builder.sleepTime }}
-            done
-            echo "=======> Server is ready."
-            echo "=======> Starting build process ..."
-            node ./node_modules/octopus/scripts/setEnv --file=../../../env.json "node ./bin/octopusRun.js buildApps"
-            if test -d dsu-fabric-ssapp; then
-                npm run build-old-ssapps
-            fi
-            rc=$?
-            echo "=======> Build process done - rc=$rc"
-            if [ $rc -ne 0 ]
-            then
-              echo "=======> ERROR during build process - Exiting with rc=$rc ..."
-            fi
+            echo "=======> Running Script to Ensure Health Check File Struture"
+            ./bin/ensureHealthCheckFileStruture.sh
             echo "=======> Exiting ..."
             exit $rc
         volumeMounts:
