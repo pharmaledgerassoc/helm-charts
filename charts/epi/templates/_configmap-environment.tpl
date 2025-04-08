@@ -33,17 +33,13 @@ data:
 {{- else }}
     export default {
       "appName": "Demiurge",
-      "vault": "server",
-      "agent": "browser",
-      "system":   "any",
-      "browser":  "any",
       "mode": "sso-direct",
       "vaultDomain":  {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote }},
       "didDomain":  {{ required "config.vaultDomain must be set" .Values.config.vaultDomain | quote }},
+      "epiDomain":  {{ required "config.domain must be set" .Values.config.domain | quote}},
+      "epiSubdomain":  {{ required "config.subDomain must be set" .Values.config.subDomain | quote}},
       "enclaveType":"WalletDBEnclave",
-      "companyName": {{ required "config.companyName must be set" .Values.config.companyName | quote }},
-      "sw": false,
-      "pwa": false
+      "companyName": {{ required "config.companyName must be set" .Values.config.companyName | quote }}
     }
 {{- end }}
 
@@ -89,7 +85,7 @@ data:
       "pwa": false,
       "allowPinLogin": false,
       "companyName": {{ required "config.companyName must be set" .Values.config.companyName | quote }},
-      "disabledFeatures": "02, 04, 05, 06, 07, 08, 09",
+      "disabledFeatures": "02, 04, 05, 06, 07, 09",
       "lockFeatures": true,
       "epiProtocolVersion": 1,
       "appBuildVersion": {{ required "config.epiVersion must be set" .Values.config.epiVersion | quote}}
@@ -116,7 +112,7 @@ data:
       "pwa": false,
       "allowPinLogin": false,
       "lockFeatures": true,
-      "disabledFeatures": "02, 04, 05, 06, 07, 08, 09",
+      "disabledFeatures": "02, 04, 05, 06, 07, 09",
       "easterEggEnabled": true,
       "epiProtocolVersion": 1,
       "appBuildVersion": {{ required "config.epiVersion must be set" .Values.config.epiVersion | quote}}
