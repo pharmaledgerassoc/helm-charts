@@ -260,7 +260,7 @@ config:
 This enables storing the following secret values in one of the supported Secret stores (e.g. Azure Key Vault or AWS Secrets Manager) instead of using Kubernetes Secrets:
 
 - `apihub.json` - If using SSO, *apihub.json* contains SSO configuration like Client ID and Secret
-- `roapihub.json` - contains Aapiub Configuration for leaflet Reader
+- `roapihub.json` - Contains Apihub Configuration for leaflet Reader
 - `env.json` - Contains the secret passphrase for de/encrypting the generated private keys for the wallets.
 
 More information can be found here:
@@ -271,7 +271,7 @@ More information can be found here:
 Sample for AWS:
 
 1. Prepare `env.json`, `apihub.json` and `roapihub.json` files. See [apihub.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/master/apihub-root/external-volume/config/apihub.json.template), [roapihub.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/master/apihub-root/external-volume/config/ro.apihub.json.template) and [env.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/master/env.json) for templates.
-2. Create a new Secret in Secrets Manager with two keys `envJson`, `apihubJson` and `roapihub.json`. Note: If you want to create the secret as PlainText, then you must encode the values to JSON String each!
+2. Create a new Secret in Secrets Manager with two keys `envJson`, `apihubJson` and `roapihubJson`. Note: If you want to create the secret as PlainText, then you must encode the values to JSON String each!
 
     Sample:
 
