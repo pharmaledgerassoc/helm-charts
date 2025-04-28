@@ -14,7 +14,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
+      - uses: actions/checkout@v4
         name: Checkout
         with:
           fetch-depth: 0
@@ -25,7 +25,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       # https://github.com/marketplace/actions/engineerd-configurator
-      - uses: engineerd/configurator@479197cb150e720c848c8dfbe12da101471258e3 # v0.0.8
+      - uses: engineerd/configurator@v0.0.10
         name: Setup helm
         with:
           name: helm
@@ -35,9 +35,9 @@ jobs:
 
       # https://github.com/helm/chart-releaser-action
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@c25b74a986eb925b398320414b576227f375f946 # v1.2.1
+        uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts
-          #config: cr.yaml
+          # config: cr.yaml
         env:
           CR_TOKEN: "${{ secrets.GIT_TOKEN }}"

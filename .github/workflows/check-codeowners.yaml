@@ -15,7 +15,7 @@ jobs:
         shell: bash
 
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
+      - uses: actions/checkout@v4
         name: Checkout
 
       - name: install yq
