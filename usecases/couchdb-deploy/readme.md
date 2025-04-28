@@ -25,19 +25,22 @@ cd network_name
 
 1. Add couchdb helm repo
 ```shell
-helm repo add couchdb https://apache.github.io/couchdb-helm/
+helm repo add pharmaledgerassoc https://pharmaledgerassoc.github.io/helm-charts
 ```
 
 2. Download the values for the helm chart network_name
 ```shell
-helm show values couchdb/couchdb --version 4.6.0 > couchdb-values.yaml
+helm show values pharmaledgerassoc/couchdb --version 4.6.0 > couchdb-values.yaml
 ```
-
 
 #### Step 3: Adjust private_configs/network_name/couchdb-values.yaml
 
 The file contains parametrization for different sets of values:
 1. specify couchdbConfig.couchdb.uuid = GENERATE_SOME_RANDOM_UUID
+```bash
+# could run on terminal the follow comand to generate an uuid
+uuidgen
+```
 2. specify clusterSize = 1
 3. specify adminPassword = PASSWORD_YOU_WANT
 4. specify persistent volumes ex:
@@ -60,31 +63,10 @@ persistentVolumeClaimRetentionPolicy:
 
 1. Install the helm chart
 ```shell
-helm install couchdb couchdb/couchdb --version 4.6.0 -f ./couchdb-values.yaml
+helm install couchdb pharmaledgerassoc/couchdb --version 4.6.0 -f ./couchdb-values.yaml
 ```
 
-#### Step 5: Create a reader user
-
-1. Verify the name of the service created on couchdb deploy should be something like: "couchdb-svc-couchdb"
-
-3. Made this requests to create the reader user (replace $COUCHDB_ADMIN_PASSWORD and $COUCHDB_USER_PASSWORD)
-
-This could be executed inside couchdb pod or in a separated job.
-
-```shell
-curl -X PUT -u "admin:$COUCHDB_ADMIN_PASSWORD" http://couchdb-svc-couchdb:5984/_users
-
-curl -X PUT -u "admin:$COUCHDB_ADMIN_PASSWORD" http://couchdb-svc-couchdb:5984/_users/org.couchdb.user:reader \
-                 -H "Content-Type: application/json" \
-                 -d "{
-                      \"name\": \"reader\",
-                      \"password\": \"$COUCHDB_USER_PASSWORD\",
-                      \"roles\": [],
-                      \"type\": \"user\"
-                    }"
-```
-
-#### Step 6: Backup your installation and private information
+#### Step 5: Backup your installation and private information
 
 Upload to your private repository all the data located in the folder _private_configs/network_name/network_name_
 
