@@ -3,8 +3,8 @@ name: couchdb-custom
 description: A Helm chart to extend the official CouchDB chart with AWS Secrets integration.
 type: application
 version: 0.1.0
-appVersion: "3.3"
+appVersion: "3.3.3"
 dependencies:
   - name: couchdb
-    version: 4.0.0
+    version: 4.6.0
     repository: "https://apache.github.io/couchdb-helm"
