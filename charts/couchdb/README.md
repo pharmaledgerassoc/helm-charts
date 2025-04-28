@@ -40,8 +40,10 @@ You must set the following values:
 uuidgen
 ```
 
-- adminPassword and readerPassword
-  these are the passwords for the admin and reader users. You can set them to any value you want but is recommended to use a strong password.
+- adminPassword and readerPassword  
+  These are the passwords for the admin and reader users. You can set them to any value you want but is recommended to use a strong password.
+  
+  **The helm chart will create a secret on kubernetes with these values and use them to connect to the database. The MAHs must use an internal management system to manage this secrets.**
 
 ### 3. Install the chart
 
