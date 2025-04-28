@@ -27,7 +27,7 @@ jobs:
         name: Setup helm-docs
         with:
           name: helm-docs
-          url: https://github.com/norwoodj/helm-docs/releases/download/v1.8.1/helm-docs_1.8.1_Linux_x86_64.tar.gz
+          url: https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz
           pathInArchive: helm-docs
       - run: helm-docs --version
 
@@ -37,7 +37,7 @@ jobs:
       - uses: pre-commit/action@v3.0.1
         name: Run pre-commit
         with:
-          extra_args: --files charts/ethadapter/* charts/epi/* charts/fgt/* charts/quorum-node/*
+          extra_args: --files charts/ethadapter/* charts/epi/* charts/fgt/* charts/quorum-node/* charts/couchdb/*
 
   checkov:
     runs-on: ubuntu-latest
