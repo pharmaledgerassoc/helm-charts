@@ -10,11 +10,11 @@ jobs:
         shell: bash
 
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
+      - uses: actions/checkout@v4
         name: Checkout
 
       # https://github.com/marketplace/actions/engineerd-configurator
-      - uses: engineerd/configurator@479197cb150e720c848c8dfbe12da101471258e3 # v0.0.8
+      - uses: engineerd/configurator@v0.0.10
         name: Setup helm
         with:
           name: helm
@@ -23,18 +23,18 @@ jobs:
       - run: helm version
 
       # https://github.com/marketplace/actions/engineerd-configurator
-      - uses: engineerd/configurator@479197cb150e720c848c8dfbe12da101471258e3 # v0.0.8
+      - uses: engineerd/configurator@v0.0.10
         name: Setup helm-docs
         with:
           name: helm-docs
-          url: https://github.com/norwoodj/helm-docs/releases/download/v1.8.1/helm-docs_1.8.1_Linux_x86_64.tar.gz
+          url: https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz
           pathInArchive: helm-docs
       - run: helm-docs --version
 
       - name: Helm Lint
         run: helm lint ./charts/* --strict
 
-      - uses: pre-commit/action@9b88afc9cd57fd75b655d5c71bd38146d07135fe # v2.0.3
+      - uses: pre-commit/action@v3.0.1
         name: Run pre-commit
         with:
           extra_args: --files charts/ethadapter/* charts/epi/* charts/fgt/* charts/quorum-node/*
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
+      - uses: actions/checkout@v4
         name: Checkout
 
       # https://github.com/bridgecrewio/checkov-action/tree/v12.1469.0

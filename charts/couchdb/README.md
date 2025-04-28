@@ -6,7 +6,7 @@ This Helm chart deploys **Apache CouchDB** with support for persistent volumes, 
 
 ```yaml
 charts/
-└── couchdb-4.0.0.tgz        # External CouchDB chart dependency
+└── couchdb-4.6.0.tgz        # External CouchDB chart dependency
 
 templates/
 ├── job.yaml                 # Init or configuration job template
