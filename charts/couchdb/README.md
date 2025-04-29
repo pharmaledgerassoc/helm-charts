@@ -29,7 +29,11 @@ helm repo add pharmaledgerassoc https://pharmaledgerassoc.github.io/helm-charts
 
 ### 2. Change the values
 
-Create a custom `custom-values.yaml` file with the content from the `values.yaml` file or use the `values.yaml` file from the chart.
+Create a custom `couchdb-values.yaml` file with the content from the `values.yaml` file or use the `values.yaml` file from the chart.
+
+```bash
+helm show values pharmaledgerassoc/couchdb-custom --version 0.0.1 > couchdb-values.yaml
+```
 
 You must set the following values:
 
@@ -50,12 +54,7 @@ uuidgen
 After changing the values, you can install the chart using the following command:
 
 ```bash
-helm install couchdb pharmaledgerassoc/couchdb --values custom-values.yaml
-
-# or
-
-helm install couchdb pharmaledgerassoc/couchdb
-
+helm install couchdb pharmaledgerassoc/couchdb-custom --version 0.0.1 -f ./couchdb-values.yaml
 ```
 
 ### Values file explanation

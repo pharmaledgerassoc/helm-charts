@@ -1,6 +1,4 @@
-
-
-## install couchdb use case
+## Install couchdb use case
 
 Install a new couchdb running instance
 
@@ -30,7 +28,7 @@ helm repo add pharmaledgerassoc https://pharmaledgerassoc.github.io/helm-charts
 
 2. Download the values for the helm chart network_name
 ```shell
-helm show values pharmaledgerassoc/couchdb --version 4.6.0 > couchdb-values.yaml
+helm show values pharmaledgerassoc/couchdb-custom --version 0.0.1 > couchdb-values.yaml
 ```
 
 #### Step 3: Adjust private_configs/network_name/couchdb-values.yaml
@@ -63,7 +61,7 @@ persistentVolumeClaimRetentionPolicy:
 
 1. Install the helm chart
 ```shell
-helm install couchdb pharmaledgerassoc/couchdb --version 4.6.0 -f ./couchdb-values.yaml
+helm install couchdb pharmaledgerassoc/couchdb-custom --version 0.0.1 -f ./couchdb-values.yaml
 ```
 
 #### Step 5: Backup your installation and private information
