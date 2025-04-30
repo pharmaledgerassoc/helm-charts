@@ -42,6 +42,22 @@ entries:
     urls:
     - https://github.com/pharmaledgerassoc/helm-charts/releases/download/blockchain-explorer-0.1.2/blockchain-explorer-0.1.2.tgz
     version: 0.1.2
+  couchdb:
+  - apiVersion: v1
+    appVersion: 3.3.3
+    created: "2025-04-30T10:55:03.463513191Z"
+    description: A database featuring seamless multi-master sync, that scales from
+      big data to mobile, with an intuitive HTTP/JSON API and designed for reliability.
+    digest: 8576cbc11444462477b24f6d16f8c4643a5af996421796e87139af195bc81e3e
+    icon: http://couchdb.apache.org/CouchDB-visual-identity/logo/CouchDB-couch-symbol.svg
+    keywords:
+    - couchdb
+    - database
+    - nosql
+    name: couchdb
+    urls:
+    - https://github.com/pharmaledgerassoc/helm-charts/releases/download/couchdb-4.6.1/couchdb-4.6.1.tgz
+    version: 4.6.1
   couchdb-custom:
   - apiVersion: v2
     appVersion: 3.3.3
@@ -2713,4 +2729,4 @@ entries:
     urls:
     - https://github.com/pharmaledgerassoc/helm-charts/releases/download/standalone-quorum-0.3.0/standalone-quorum-0.3.0.tgz
     version: 0.3.0
-generated: "2025-04-29T10:06:33.051926857Z"
+generated: "2025-04-30T10:55:03.633155221Z"
