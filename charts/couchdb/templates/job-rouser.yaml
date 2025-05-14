@@ -28,8 +28,9 @@ spec:
       serviceAccountName: {{ template "couchdb.serviceAccount" . }}
       {{- end }}
       containers:
-        - name: curl
-          image: curlimages/curl:latest
+        - name: readuser-setup
+          image: {{ .Values.readerUserSetup.image.repository }}:{{ .Values.readerUserSetup.image.tag }}
+          imagePullPolicy: {{ .Values.readerUserSetup.image.pullPolicy }}
           command:
             - "sh"
             - "-c"
