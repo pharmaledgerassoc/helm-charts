@@ -17,5 +17,5 @@
 4. [Smart Contract](ethereum-smart-contract/readme.md)
 5. [Blockchain explorer](blockchain-explorer/readme.md)
 6. [Ethereum Adapter](ethereum-adapter/readme.md)
+5. [CouchDB Deploy](couchdb-deploy/readme.md)
 7. [Api Hub](api-hub/readme.md)
-8. [Update Api Hub](update-api-hub/readme.md)

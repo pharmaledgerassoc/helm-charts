@@ -1,6 +1,6 @@
 # epi
 
-![Version: 0.7.11](https://img.shields.io/badge/Version-0.7.11-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.0.0](https://img.shields.io/badge/AppVersion-4.0.0-informational?style=flat-square)
+![Version: 0.7.12](https://img.shields.io/badge/Version-0.7.12-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.0.0](https://img.shields.io/badge/AppVersion-4.0.0-informational?style=flat-square)
 
 A Helm chart for Pharma Ledger epi (electronic product information) application
 
@@ -21,6 +21,12 @@ A Helm chart for Pharma Ledger epi (electronic product information) application
 - The [values.yaml file](./values.yaml) shows the raw view of all configuration values.
 
 ## Changelog
+
+- On 0.7.12 - Defaults to use epi 4.0.0
+  - Changes was done on apihub.json to add couchdb
+  - Created an independent apihub.json for leaflet-reader and added to secret
+  - Added affinity rules
+  - Added one more ingress route - /metadata/*
 
 - From 0.3.x to 0.4.x - Defaults to use epi v1.3.1
   - Removed Seedsbackup (required for epi <= 1.2.0)
@@ -158,7 +164,7 @@ It is recommended to put non-sensitive configuration values in an configuration 
 2. Install via helm to namespace `default`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.12 \
         --install \
         --values my-config.yaml \
     ```
@@ -254,6 +260,7 @@ config:
 This enables storing the following secret values in one of the supported Secret stores (e.g. Azure Key Vault or AWS Secrets Manager) instead of using Kubernetes Secrets:
 
 - `apihub.json` - If using SSO, *apihub.json* contains SSO configuration like Client ID and Secret
+- `roapihub.json` - Contains Apihub Configuration for leaflet Reader
 - `env.json` - Contains the secret passphrase for de/encrypting the generated private keys for the wallets.
 
 More information can be found here:
@@ -263,15 +270,17 @@ More information can be found here:
 
 Sample for AWS:
 
-1. Prepare `env.json` and `apihub.json` files. See [here](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub-root/external-volume/config/apihub.json) and [here](https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/env.json) for templates.
-2. Create a new Secret in Secrets Manager with two keys `envJson` and `apihubJson`. Note: If you want to create the secret as PlainText, then you must encode the values to JSON String each!
+1. Prepare `env.json`, `apihub.json` and `roapihub.json` files. See [apihub.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/master/apihub-root/external-volume/config/apihub.json.template), [roapihub.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/master/apihub-root/external-volume/config/ro.apihub.json.template) and [env.json](https://github.com/pharmaledgerassoc/epi-workspace/blob/master/env.json) for templates.
+2. Create a new Secret in Secrets Manager with two keys `envJson`, `apihubJson` and `roapihubJson`. Note: If you want to create the secret as PlainText, then you must encode the values to JSON String each!
 
     Sample:
 
     ```json
     {
         "envJson": "{  \"PSK_TMP_WORKING_DIR\": \"tmp\", <AND MORE IN JSON STRING FORMAT> }",
-        "apihubJson": "{  \"storage\": \"../apihub-root\",  <AND MORE IN JSON STRING FORMAT> }"
+        "apihubJson": "{  \"storage\": \"../apihub-root\",  <AND MORE IN JSON STRING FORMAT> }",
+        "roapihubJson": "{  \"storage\": \"../apihub-root\",  <AND MORE IN JSON STRING FORMAT> }"
+
     }
     ```
 
@@ -341,6 +350,8 @@ Sample for AWS:
                   objectAlias: env.json
                 - path: apihubJson
                   objectAlias: apihub.json
+                - path: roapihubJson
+                  objectAlias: roapihub.json
     ```
 
 ## Backup: Create VolumeSnapshot before upgrading and before deletion of helm release
@@ -366,7 +377,7 @@ Run `helm upgrade --helm` for full list of options.
     You can install into other namespace than `default` by setting the `--namespace` parameter, e.g.
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.12 \
         --install \
         --namespace=my-namespace \
         --values my-config.yaml \
@@ -377,7 +388,7 @@ Run `helm upgrade --helm` for full list of options.
     Provide the `--wait` argument and time to wait (default is 5 minutes) via `--timeout`
 
     ```bash
-    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.11 \
+    helm upgrade my-release-name pharmaledgerassoc/epi --version=0.7.12 \
         --install \
         --wait --timeout=600s \
         --values my-config.yaml \

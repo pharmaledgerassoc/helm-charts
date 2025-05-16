@@ -191,7 +191,7 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
     "lightDBEnclave",
     "staticServer"
   ],
-  "componentsConfig": {
+"componentsConfig": {
     "epi-mapping-engine": {
       "module": "./../../gtin-resolver",
       "function": "getEPIMappingEngineForAPIHUB"
@@ -211,10 +211,6 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
     "get-gtin-owner": {
       "module": "./../../gtin-resolver",
       "function": "getGTINOwner"
-    },
-    "get-fixed-url": {
-      "module": "./../../gtin-resolver",
-      "function": "getFixedUrl"
     },
     "integration-api": {
       "module": "./../../gtin-resolver",
@@ -276,6 +272,12 @@ Taken from https://github.com/pharmaledgerassoc/epi-workspace/blob/v1.3.1/apihub
     "debugLogEnabled": false
   },
   "serverAuthentication": false
+  "db": {
+    "uri": "<TODO_COUCHDB_URI>",
+    "user": "admin",
+    "secret": "<TODO_COUCHDB_SECRET>",
+    "debug": "<TODO_COUCHDB_DEBUG>"
+  }  
 }
 {{- end }}
 
@@ -300,12 +302,16 @@ Configuration apihub.json for read only mode
   ],
   "componentsConfig": {
     "leaflet-web-api": {
-      "module": "./../../gtin-resolver",
-      "function": "getWebLeaflet"
+        "module": "./../../gtin-resolver",
+        "function": "getWebLeaflet"
     },
     "get-gtin-owner": {
-      "module": "./../../gtin-resolver",
-      "function": "getGTINOwner"
+        "module": "./../../gtin-resolver",
+        "function": "getGTINOwner"
+    },
+    "metadata": {
+        "module": "./../../gtin-resolver",
+        "function": "getMetadata"
     },
     "get-fixed-url": {
       "module": "./../../gtin-resolver",
@@ -316,9 +322,9 @@ Configuration apihub.json for read only mode
           "function": "getMetadata"
     },
     "staticServer": {
-      "excludedFiles": [
-        ".*.secret"
-      ]
+        "excludedFiles": [
+          ".*.secret"
+        ]
     },
     "bricking": {},
     "anchoring": {}
@@ -330,7 +336,13 @@ Configuration apihub.json for read only mode
   "enableRequestLogger": true,
   "enableJWTAuthorisation": false,
   "enableOAuth": false,
-  "enableLocalhostAuthorization": false
+  "enableLocalhostAuthorization": false,
+  "db": {
+    "uri": "<TODO_COUCHDB_URI>",
+    "user": "reader",
+    "secret": "<TODO_COUCHDB_SECRET>",
+    "debug": "<TODO_COUCHDB_DEBUG>"
+  }
 }
 {{- end }}
 
