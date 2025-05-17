@@ -313,14 +313,6 @@ Configuration apihub.json for read only mode
         "module": "./../../gtin-resolver",
         "function": "getMetadata"
     },
-    "get-fixed-url": {
-      "module": "./../../gtin-resolver",
-      "function": "getFixedUrl"
-    },
-    "metadata": {
-          "module": "./../../gtin-resolver",
-          "function": "getMetadata"
-    },
     "staticServer": {
         "excludedFiles": [
           ".*.secret"
