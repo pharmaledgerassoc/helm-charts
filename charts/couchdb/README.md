@@ -189,10 +189,10 @@ CouchDB chart and their default values:
 | annotations | object | `{}` |  |
 | autoSetup.defaultDatabases[0] | string | `"_global_changes"` |  |
 | autoSetup.enabled | bool | `false` |  |
-| autoSetup.image.pullPolicy | string | `"Always"` |  |
-| autoSetup.image.repository | string | `"curlimages/curl"` |  |
+| autoSetup.image.pullPolicy | string | `"IfNotPresent"` |  |
+| autoSetup.image.repository | string | `"public.ecr.aws/pharmaledgerassoc/curlimages/curl"` |  |
 | autoSetup.image.tag | string | `"latest"` |  |
-| clusterSize | int | `3` | the initial number of nodes in the CouchDB cluster. |
+| clusterSize | int | `1` | the initial number of nodes in the CouchDB cluster. |
 | couchdbConfig | object | `{"chttpd":{"bind_address":"any","require_valid_user":false}}` | couchdbConfig will override default CouchDB configuration settings. The contents of this map are reformatted into a .ini file laid down by a ConfigMap object. ref: http://docs.couchdb.org/en/latest/config/index.html |
 | createAdminSecret | bool | `false` | If createAdminSecret is enabled a Secret called <ReleaseName>-couchdb will be created containing auto-generated credentials. Users who prefer to set these values themselves have a couple of options:  1) The `adminUsername`, `adminPassword`, `adminHash`, and `cookieAuthSecret`    can be defined directly in the chart's values. Note that all of a chart's    values are currently stored in plaintext in a ConfigMap in the tiller    namespace.  2) This flag can be disabled and a Secret with the required keys can be    created ahead of time. |
 | dns.clusterDomainSuffix | string | `"cluster.local"` |  |
@@ -203,7 +203,7 @@ CouchDB chart and their default values:
 | extraPorts | list | `[]` |  |
 | extraSecretName | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"couchdb"` |  |
+| image.repository | string | `"public.ecr.aws/pharmaledgerassoc/couchdb"` |  |
 | image.tag | string | `"3.3.3"` |  |
 | ingress.annotations | object | `{}` |  |
 | ingress.enabled | bool | `false` |  |
@@ -211,7 +211,7 @@ CouchDB chart and their default values:
 | ingress.path | string | `"/"` |  |
 | ingress.tls | string | `nil` |  |
 | initImage.pullPolicy | string | `"Always"` |  |
-| initImage.repository | string | `"busybox"` |  |
+| initImage.repository | string | `"public.ecr.aws/pharmaledgerassoc/busybox"` |  |
 | initImage.tag | string | `"latest"` |  |
 | initResources | object | `{}` |  |
 | labels | object | `{}` |  |
@@ -239,6 +239,9 @@ CouchDB chart and their default values:
 | prometheusPort.enabled | bool | `false` |  |
 | prometheusPort.port | int | `17986` |  |
 | readerUserSetup.enabled | bool | `true` |  |
+| readerUserSetup.image.pullPolicy | string | `"IfNotPresent"` |  |
+| readerUserSetup.image.repository | string | `"public.ecr.aws/pharmaledgerassoc/curlimages/curl"` |  |
+| readerUserSetup.image.tag | string | `"latest"` |  |
 | readinessProbe.enabled | bool | `true` |  |
 | readinessProbe.failureThreshold | int | `3` |  |
 | readinessProbe.initialDelaySeconds | int | `0` |  |
