@@ -86,6 +86,20 @@ spec:
             cd /ePI-workspace
             echo "=======> Running Script to Ensure Health Check File Struture"
             ./bin/ensureHealthCheckFileStruture.sh
+            echo "=======> Starting application in background process ..."
+            export ENABLE_SSO=false
+            npm run server > server.log 2>&1 &
+            until [ -f server.log ]; do
+              sleep 1
+            done
+            tail -f server.log &
+            server_pid=$
+            echo "=======> Application running in background with PID=$server_pid"
+            SEARCH_STRING="ready to receive requests"
+            while ! grep -q "$SEARCH_STRING" server.log; do
+              sleep {{ .Values.builder.sleepTime }}
+            done
+            echo "=======> Server is ready."
             echo "=======> Exiting ..."
             exit $rc
         volumeMounts:
